@@ -1,9 +1,134 @@
 import React from 'react';
+import styled from 'styled-components';
+
 
 export default function SigninComponent() {
   return (
-    <div>
-      <h1>SignIn</h1>
-    </div>
+    <SigninBase>
+      <Inner>
+        <SigninNav>
+          <SigninTitle>
+            <img 
+            src={`${process.env.PUBLIC_URL}/assets/vocalogo.webp`} alt='로고' 
+            style={{width:"50%", height: "50%"}}
+            />
+          </SigninTitle>
+        </SigninNav>
+
+        <SigninContent>
+          <SigninTitle style={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
+            <img 
+            src={`${process.env.PUBLIC_URL}/assets/signlogo.webp`} alt='로고' 
+            style={{width:"40%", height: "50%"}}
+            />
+            <p style={{color: '#34314c', fontSize: '13px'}}>로그인이 필요한 서비스입니다.</p>
+          </SigninTitle>
+          <InputWrap style={{marginTop: "20px"}}>
+            <InputLabel htmlFor="emailInput"><em style={{color: "red", marginRight: "2px",   verticalAlign: "-2px"}}>*</em>이메일</InputLabel>
+            <Input 
+            type="email"
+            id="emailInput"
+            placeholder="이메일을 입력해주세요."
+            />
+          </InputWrap>
+          <InputWrap>
+            <InputLabel htmlFor="pwInput"><em style={{color: "red", marginRight: "2px",   verticalAlign: "-2px"}}>*</em>비밀번호</InputLabel>
+            <Input 
+            type="number"
+            id="pwInput"
+            placeholder="비밀번호를 입력해주세요."
+            />
+          </InputWrap>
+
+          <BtnWrap>
+            <Button>로그인</Button>
+            <Button>회원가입</Button>
+          </BtnWrap>
+        </SigninContent>
+
+      </Inner>
+    </SigninBase>
   )
 }
+
+const SigninBase = styled.div`
+
+`
+
+const Inner = styled.div `
+width: 1300px;
+margin: 0 auto;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`
+
+const SigninNav = styled.header`
+width: 1200px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+`
+
+const SigninContent = styled.form`
+background-color: #fff;
+width: 370px;
+height: 500px;
+margin-top: 50px;
+border-radius: 12px;
+box-shadow : 5px 5px 10px -5px;
+`
+
+const SigninTitle = styled.div`
+margin-top: 15px;
+`
+
+const InputWrap = styled.div`
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`
+const Input = styled.input`
+margin-top: 30px;
+width: 300px;
+border: 1px solid #dddddd;
+border-radius: 8px;
+padding: 16px;
+font-size: 14px;
+&:focus {
+  border-color: #34314c;
+}
+`
+
+const InputLabel = styled.label`
+display: inline-block;
+position: absolute;
+top: 18px;
+left: 54px;
+padding: 5px 10px;
+background: white;
+font-size: 12px;
+color: #888;
+`
+
+const BtnWrap = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+margin-top: 30px;
+`
+
+const Button = styled.button`
+width: 300px;
+padding: 15px 0;
+margin-top: 15px;
+font-size: 14px;
+border-radius: 8px;
+background-color: #4D94E6;
+color: #fff;
+`
