@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import { createActions, handleActions } from "redux-actions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
+import { persistor } from '../create';
 
 import { LoginReqType } from "../../types";
 
@@ -51,11 +52,12 @@ const reducer = handleActions<AuthState,any>(
 export default reducer
 
 //saga
-export const { login } = createActions("LOGIN", "LOGOUT", {prefix})
+export const { login, logout } = createActions("LOGIN", "LOGOUT", {prefix})
 
 
 export function* authSaga() {
   yield takeEvery(`${prefix}/LOGIN`, loginSaga)
+  yield takeEvery(`${prefix}/LOGOUT`, logoutSaga)
 }
 
 interface LoginSagaAction extends AnyAction {
@@ -77,5 +79,14 @@ function* loginSaga(action:LoginSagaAction) {
   } catch(error) {
     yield put(fail('UNKNOWN_ERROR'))
     alert('아이디와 비밀번호를 확인해주세요.')
+  }
+}
+
+function* logoutSaga() {
+  try{
+    yield put(pending())
+    yield put(success(null))
+  } catch(error) {
+    console.log(error)
   }
 }

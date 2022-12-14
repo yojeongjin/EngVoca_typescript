@@ -1,7 +1,11 @@
 import React  from 'react';
 import styled from 'styled-components';
 
-export default function ProfileCard() {
+interface ProfileProps {
+  logout: () => void
+}
+
+const ProfileCard: React.FC<ProfileProps> = ({logout}) => {
   return (
     <ProfileCardBase>
       <ProfileImg>
@@ -17,19 +21,21 @@ export default function ProfileCard() {
           <span style={{marginRight: '5px'}}>1 </span>
           <span>쌀구</span>
         </SpanWrap>
-        <Logout>로그아웃</Logout>
+        <Logout onClick={logout}>로그아웃</Logout>
       </ProfileContent>
 
     </ProfileCardBase>
   )
 }
 
+export default ProfileCard
+
 const ProfileCardBase = styled.div`
 width: 80%;
 padding: 20px;
 display: flex;
 border-radius: 20px;
-margin: 25px auto 0;
+margin: 30px auto 0;
 background-color: #fff;
 font-size: 14px;
 `

@@ -7,7 +7,7 @@ interface SigninProps {
   login: (req: LoginReqType) => void
 }
 
-const SigninComponent: React.FC<SigninProps> = ({login}) => {
+const Signin: React.FC<SigninProps> = ({login}) => {
   const emailRef = useRef<HTMLInputElement>(null)
   const pwRef = useRef<HTMLInputElement>(null)
 
@@ -71,7 +71,7 @@ const SigninComponent: React.FC<SigninProps> = ({login}) => {
   )
 }
 
-export default SigninComponent
+export default Signin
 
 const SigninBase = styled.div`
 
