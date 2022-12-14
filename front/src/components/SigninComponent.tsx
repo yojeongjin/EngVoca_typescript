@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
+import { LoginReqType } from '../types';
 
-export default function SigninComponent() {
+interface SigninProps {
+  login: (req: LoginReqType) => void
+}
+
+const SigninComponent: React.FC<SigninProps> = ({login}) => {
+  const emailRef = useRef<HTMLInputElement>(null)
+  const pwRef = useRef<HTMLInputElement>(null)
+
+  const signinHandler = () => {
+    const email = emailRef.current!.value
+    const password = pwRef.current!.value
+
+    login({email, password})
+  }
+
+
   return (
     <SigninBase>
       <Inner>
@@ -29,20 +45,24 @@ export default function SigninComponent() {
             type="email"
             id="emailInput"
             placeholder="이메일을 입력해주세요."
+            ref={emailRef}
             />
           </InputWrap>
           <InputWrap>
             <InputLabel htmlFor="pwInput"><em style={{color: "red", marginRight: "2px",   verticalAlign: "-2px"}}>*</em>비밀번호</InputLabel>
             <Input 
-            type="number"
+            type="text"
             id="pwInput"
             placeholder="비밀번호를 입력해주세요."
+            ref={pwRef}
             />
           </InputWrap>
 
           <BtnWrap>
-            <Button>로그인</Button>
-            <Button>회원가입</Button>
+            <Button onClick={signinHandler}>로그인</Button>
+            <Button
+            style={{backgroundColor: "transparent", border: "1px solid #4d94e6", color: "#4d94e6"}}
+            >회원가입</Button>
           </BtnWrap>
         </SigninContent>
 
@@ -50,6 +70,8 @@ export default function SigninComponent() {
     </SigninBase>
   )
 }
+
+export default SigninComponent
 
 const SigninBase = styled.div`
 
@@ -72,7 +94,7 @@ justify-content: space-between;
 align-items: center;
 `
 
-const SigninContent = styled.form`
+const SigninContent = styled.div`
 background-color: #fff;
 width: 370px;
 height: 500px;

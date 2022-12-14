@@ -1,4 +1,10 @@
+import { AnyAction } from 'redux';
 import { createActions, handleActions } from "redux-actions";
+import { call, delay, put, takeEvery } from "redux-saga/effects";
+import axios from "axios";
+
+import { LoginReqType } from "../../types";
+import { TupleType } from 'typescript';
 
 interface AuthState {
   token: string | null;
@@ -21,7 +27,8 @@ export const { pending, success, fail } = createActions(
   {prefix}
 )
 
-const reducer = handleActions<AuthState,string>(
+
+const reducer = handleActions<AuthState,any>(
   {
     PENDING: (state) => ({
       ...state,
@@ -29,13 +36,14 @@ const reducer = handleActions<AuthState,string>(
       error: null
     }),
     SUCCESS: (state, action) => ({
+      ...state,
       token: action.payload,
       loading: false,
       error: null
     }),
-    FAIL: (state, action:any) => ({
+    FAIL: (state, action) => ({
       ...state,
-      laoding: false,
+      loading: false,
       error: action.payload
     })
   }, initialState, { prefix }
@@ -44,7 +52,30 @@ const reducer = handleActions<AuthState,string>(
 export default reducer
 
 //saga
+export const { login } = createActions("LOGIN", "LOGOUT", {prefix})
+
 
 export function* authSaga() {
+  yield takeEvery(`${prefix}/LOGIN`, loginSaga)
+}
+
+interface LoginSagaAction extends AnyAction {
+  payload: LoginReqType;
+}
+
+async function loginAPI(loginData: LoginReqType): Promise<string> {
+  const res = await axios.post('http://localhost:3001/api/signin', loginData)
   
+  return res.data.result.jwt
+}
+
+function* loginSaga(action:LoginSagaAction) {
+  try{
+    yield put(pending())
+    const token: string = yield call(loginAPI, action.payload)
+    yield put(success(token))
+  } catch(error) {
+    yield put(fail('UNKNOWN_ERROR'))
+    alert('로그인에 실패하였습니다.')
+  }
 }
