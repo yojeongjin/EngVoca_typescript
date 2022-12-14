@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { LoginReqType } from "../../types";
 
-interface AuthState {
+export interface AuthState {
   token: string | null;
   loading: boolean;
   error: Error | null;

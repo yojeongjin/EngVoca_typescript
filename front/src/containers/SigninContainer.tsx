@@ -1,7 +1,7 @@
 import React, { useCallback }  from 'react';
 import { useDispatch } from 'react-redux';
 
-import SigninComponent from "../components/SigninComponent";
+import Signin from "../components/Signin";
 import { login as loginSagaStart } from '../redux/modules/auth';
 import { LoginReqType } from '../types';
 
@@ -13,5 +13,5 @@ export default function SigninContainer() {
     dispatch(loginSagaStart(req))
   }, [dispatch])
 
-  return <SigninComponent login={login}/>
+  return <Signin login={login}/>
 }

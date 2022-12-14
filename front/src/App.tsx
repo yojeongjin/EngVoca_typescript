@@ -4,7 +4,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Error from './pages/Error';
-import Signin from './pages/Signin';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path='signin' element={<Signin />} />
+          <Route path='signin' element={<Login />} />
           <Route path='/' element={<Home />} />
         </Routes>
       </BrowserRouter>
