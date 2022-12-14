@@ -1,10 +1,9 @@
 import { AnyAction } from 'redux';
 import { createActions, handleActions } from "redux-actions";
-import { call, delay, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
 import { LoginReqType } from "../../types";
-import { TupleType } from 'typescript';
 
 interface AuthState {
   token: string | null;
@@ -74,8 +73,9 @@ function* loginSaga(action:LoginSagaAction) {
     yield put(pending())
     const token: string = yield call(loginAPI, action.payload)
     yield put(success(token))
+    window.location.replace('/')
   } catch(error) {
     yield put(fail('UNKNOWN_ERROR'))
-    alert('로그인에 실패하였습니다.')
+    alert('아이디와 비밀번호를 확인해주세요.')
   }
 }

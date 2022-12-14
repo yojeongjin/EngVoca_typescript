@@ -5,13 +5,13 @@ import createSagaMiddleware from '@redux-saga/core'
 import reducer from './modules/reducer'
 import rootSaga from './modules/rootsaga'
 
-const create = () => {
-  const sagaMiddleware = createSagaMiddleware()
+//redux-persist
+import { persistStore } from 'redux-persist'
 
-  const store = createStore (reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
-  sagaMiddleware.run(rootSaga)
-  
-  return store
-}
+const sagaMiddleware = createSagaMiddleware()
+export const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
+sagaMiddleware.run(rootSaga)
 
-export default create
+export const persistor = persistStore(store);
+
+export default { store, persistor }
