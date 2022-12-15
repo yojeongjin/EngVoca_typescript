@@ -74,7 +74,8 @@ const Signin: React.FC<SigninProps> = ({login}) => {
 export default Signin
 
 const SigninBase = styled.div`
-
+font-family: 'AppleSDGothicNeo';
+font-weight: 500;
 `
 
 const Inner = styled.div `

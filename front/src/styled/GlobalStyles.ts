@@ -1,11 +1,14 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
+
+
 const GlobalStyles = createGlobalStyle`
   ${reset}
+
   * {
   font-family: inherit;
-  font-size: inherit;
+  font-weight: inherit;
   color: inherit;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

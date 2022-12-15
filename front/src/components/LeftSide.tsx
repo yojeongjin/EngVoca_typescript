@@ -50,7 +50,8 @@ left: 0;
 width: 400px;
 height: 100vh;
 background-color: #d9e1e8;
-
+font-family: 'AppleSDGothicNeo';
+font-weight: 500;
 `
 
 const Logo = styled.div`

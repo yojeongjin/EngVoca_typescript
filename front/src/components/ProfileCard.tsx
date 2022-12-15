@@ -51,7 +51,8 @@ justify-content: center;
 `
 
 const SpanWrap = styled.div`
-
+font-family: 'AppleSDGothicNeo';
+font-weight: 500;
 `
 const ProfileContent = styled.div`
 flex: 1;

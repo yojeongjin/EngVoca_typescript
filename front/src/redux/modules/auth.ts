@@ -2,9 +2,9 @@ import { AnyAction } from 'redux';
 import { createActions, handleActions } from "redux-actions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
-import { persistor } from '../create';
 
 import { LoginReqType } from "../../types";
+import { persistor } from '../create';
 
 export interface AuthState {
   token: string | null;
