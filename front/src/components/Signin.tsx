@@ -51,7 +51,7 @@ const Signin: React.FC<SigninProps> = ({login}) => {
           <InputWrap>
             <InputLabel htmlFor="pwInput"><em style={{color: "red", marginRight: "2px",   verticalAlign: "-2px"}}>*</em>비밀번호</InputLabel>
             <Input 
-            type="text"
+            type="password"
             id="pwInput"
             placeholder="비밀번호를 입력해주세요."
             ref={pwRef}

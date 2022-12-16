@@ -1,17 +1,20 @@
 import React, { ReactNode }  from 'react';
 import styled from 'styled-components';
 
-
 interface MainProps {
   children: ReactNode
 }
 
 
-export const Main = ({children}:MainProps) => (
-  <MainBase>
-    {children}
-  </MainBase>
-)
+export const Main = ({children}:MainProps) => {
+
+  return (
+    <MainBase>
+      {children}
+    </MainBase>
+  )
+}
+
 
 
 const MainBase = styled.div`

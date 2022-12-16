@@ -8,3 +8,18 @@ exports.list = (req,res) => {
 		res.send(row)
 	})
 }
+
+exports.modify = (req,res) => { 
+	const { active, day } = req.body
+
+	sql = "update mydb_type.Day set DayActive = ? where idDay = ?"
+	conn.query(sql,[ active, day ],(err,row) => { 
+		if(err) throw err;
+
+		return res.send({
+			success: true,
+			code: 200,
+			msg:'수정되었습니다.'
+		})
+	})
+}

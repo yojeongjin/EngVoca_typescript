@@ -1,14 +1,23 @@
 import { AuthState } from "./redux/modules/auth";
-import { DayState } from "./redux/modules/day";
 
 export type LoginReqType = {
   email: string
   password: string
 }
 
+export type ActiveReqType = {
+  active: string
+  day: number
+}
+
+export type DayWords = {
+  words: string
+  meaning: string
+  idVocabulary: number
+}
+
 export interface RootState {
   auth: AuthState
-  day: DayState
 }
 
 export interface DayType {

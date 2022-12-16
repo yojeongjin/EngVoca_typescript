@@ -5,6 +5,7 @@ import { RootState } from "../types";
 import SigninContainer from "../containers/SigninContainer";
 import LeftSide from "../components/LeftSide";
 import DayContainer from "../containers/DayContainer";
+import { useDispatch } from "react-redux";
 
 
 export default function Home() {

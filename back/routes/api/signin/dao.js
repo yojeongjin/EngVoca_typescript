@@ -4,6 +4,13 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 
+exports.list = (req,res) => { 
+	conn.query("select * from mydb_type.User",(err,row) => { 
+		if(err) throw err;
+		res.send(row)
+	})
+}
+
 exports.view = (req,res) => {
   const { email, password } = req.body
 

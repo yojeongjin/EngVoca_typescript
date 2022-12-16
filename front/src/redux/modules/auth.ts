@@ -4,7 +4,6 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
 import { LoginReqType } from "../../types";
-import { persistor } from '../create';
 
 export interface AuthState {
   token: string | null;
