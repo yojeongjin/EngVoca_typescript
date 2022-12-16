@@ -6,7 +6,7 @@ import SigninContainer from "../containers/SigninContainer";
 import Home from "./Home";
 
 export default function Signin() {
-  const token = useSelector<RootState , string | null>((state) => state.auth.token)
+  const token = useSelector<RootState , {} | null>((state) => state.auth.user)
 
   if (token !== null) {
    return <Home />

@@ -3,16 +3,16 @@ import { createActions, handleActions } from "redux-actions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
-import { LoginReqType } from "../../types";
+import { LoginReqType, UserType } from "../../types";
 
 export interface AuthState {
-  token: string | null;
+  user: UserType | null;
   loading: boolean;
   error: Error | null;
 }
 
 const initialState: AuthState = {
-  token: null,
+  user: null,
   loading: false,
   error: null
 }
@@ -36,7 +36,7 @@ const reducer = handleActions<AuthState,any>(
     }),
     SUCCESS: (state, action) => ({
       ...state,
-      token: action.payload,
+      user: action.payload,
       loading: false,
       error: null
     }),
@@ -66,14 +66,14 @@ interface LoginSagaAction extends AnyAction {
 async function loginAPI(loginData: LoginReqType): Promise<string> {
   const res = await axios.post('http://localhost:3001/api/signin', loginData)
   
-  return res.data.result.jwt
+  return res.data.result
 }
 
 function* loginSaga(action:LoginSagaAction) {
   try{
     yield put(pending())
-    const token: string = yield call(loginAPI, action.payload)
-    yield put(success(token))
+    const user: UserType = yield call(loginAPI, action.payload)
+    yield put(success(user))
     window.location.replace('/')
   } catch(error) {
     yield put(fail('UNKNOWN_ERROR'))

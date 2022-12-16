@@ -1,17 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from 'styled-components'
 import axios from 'axios'
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Main } from "../components/Main";
 import LeftSide from "../components/LeftSide";
+import { DayWords, RootState, SaveReqType, UserType } from "../types";
+import { saving } from "../redux/modules/save";
+
+import save from "../assets/save.png"
+import saved from "../assets/saved.png"
+
 
 export default function Test() {
   const params = useParams()
   const idx = params.idx
-
-  type DayWords = { words: string; meaning: string, idVocabulary: number}
+  const dispatch = useDispatch()
+  const user = useSelector<RootState , UserType | null>((state) => state.auth.user)
 
   const [ words, setWords ] = useState<DayWords[]>([])
+  const [ word, setWord ] = useState<string>('')
+  const [ meaning, setMeaning ] = useState<string>('')
+
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/words/'+idx, {params: {
@@ -25,16 +35,32 @@ export default function Test() {
     })
   },[])
 
+  const saveWord = useCallback(() => {
+    let idUser = user?.idUser
+    dispatch(saving({word, meaning, idUser}))
+  }, [dispatch, word, meaning])
+
+  const handleClick = (idx:any) => {
+    words[idx].isSave = true
+    setWord(words[idx].words)
+    setMeaning(words[idx].meaning)
+
+    saveWord()
+  }
+
   const wordsDetail =
-  words.map((words) => (
-    <ContentWrap>
-        <TestList key={words.idVocabulary}>
-          <TestItem1>{words.words}</TestItem1>
-          <TestItem2>{words.meaning}</TestItem2>
+  words.map((word, idx) => (
+    <ContentWrap key={word.idVocabulary}>
+        <TestList>
+          <TestItem1>{word.words}</TestItem1>
+          <TestItem2>{word.meaning}</TestItem2>
         </TestList>
         <InputContent>
           <Input />
         </InputContent>
+        <SaveContent onClick={()=>handleClick(idx)} >
+          <SaveIcon isSave={word.isSave === true}></SaveIcon>
+        </SaveContent>
     </ContentWrap>
   ))
 
@@ -47,7 +73,7 @@ export default function Test() {
             {wordsDetail}
             <span 
             style={{fontSize: "13px", display: "block", textAlign: "center", padding: "15px 0 0"}}>
-              💯카드를 뒤집으면 정답이 보여요!
+              🍋카드를 뒤집으면 정답이 보여요!
             </span>
           </TestContent>
         </Inner>
@@ -142,4 +168,17 @@ align-items: center;
   ${TestItem2} {
     transform: rotateY(0deg);
   }
+`
+
+const SaveContent = styled.div`
+width: 10%;
+display: flex;
+justify-content: center;
+align-items: center;
+`
+
+const SaveIcon = styled.button<{isSave:boolean}>`
+width: 24px;
+height: 24px;
+background-image: ${(props) => props.isSave ? `url(${saved})` : `url(${save})`};
 `

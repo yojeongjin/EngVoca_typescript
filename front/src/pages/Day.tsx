@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useParams, Link } from "react-router-dom";
 import { Main } from "../components/Main";
 import LeftSide from "../components/LeftSide";
-import { DayWords, ActiveReqType } from "../types";
+import { DayWords } from "../types";
 
 export default function Day() {
   const params = useParams()

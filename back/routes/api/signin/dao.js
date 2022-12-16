@@ -34,7 +34,7 @@ exports.view = (req,res) => {
         secret
       )
       return res.send({
-        result: { jwt: token },
+        result: { jwt: token, idUser: idUser },
         success: true,
         code: 200,
         msg:'로그인 성공'

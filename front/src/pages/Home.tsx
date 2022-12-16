@@ -5,11 +5,10 @@ import { RootState } from "../types";
 import SigninContainer from "../containers/SigninContainer";
 import LeftSide from "../components/LeftSide";
 import DayContainer from "../containers/DayContainer";
-import { useDispatch } from "react-redux";
 
 
 export default function Home() {
-  const token = useSelector<RootState , string | null>((state) => state.auth.token)
+  const token = useSelector<RootState , {} | null>((state) => state.auth.user)
 
 
   if (token === null) {
