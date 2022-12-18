@@ -19,14 +19,22 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive}) => {
 
   const dayDetail = 
   dayData?.map((day) => (
-    <PracticeItem key={day.idDay} onClick={()=> {changeHandler(day.idDay)}}>
-       <Link 
-      to={"/day/" + day.idDay}
-      style={{width: "100%",height:"100%", display:"flex", justifyContent: "center", alignItems:"center", flexDirection:"column"}}>
-        Day {day.idDay}
-        <span style={{fontSize: "11px", display: "block"}}>{day.DayActive}</span>
-      </Link>
-    </PracticeItem>
+    <Link to={"/day/" + day.idDay}  key={day.idDay} >
+      {
+        day.DayActive === "학습 완료" ?
+        <PracticeItem onClick={()=> {changeHandler(day.idDay)}}
+        style={{backgroundColor: "#eee", border: "1px solid #eee", color: "#333"}}>
+          Day {day.idDay} 
+          <Active style={{color: "#333"}}>{day.DayActive}</Active>
+        </PracticeItem>
+        :
+        <PracticeItem onClick={()=> {changeHandler(day.idDay)}}>
+          Day {day.idDay} 
+          <Active>{day.DayActive}</Active>
+        </PracticeItem>
+      }
+
+    </Link>
   ))
 
   return (
@@ -47,9 +55,7 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive}) => {
 export default DayPractice
 
 const DayPracticeBase = styled.div`
-font-family: 'AppleSDGothicNeo';
-font-weight: 500;
-height: 100vh;
+
 `
 
 const Inner = styled.div`
@@ -75,13 +81,34 @@ width: 100%;
 font-size: 14px;
 display: flex;
 flex-wrap: wrap;
+display: flex;
+justify-content: center;
+align-items: center;
+`
+
+const Active = styled.span`
+font-size: 11px;
+display: block;
+color: #4D94E6;
 `
 
 const PracticeItem = styled.li`
-width: 30%;
+width: 150px;
 height: 50px;
 padding: 0 30px;
-margin: 20px auto 0;
+margin: 20px 8px 0;
 border: 1px solid #4D94E6;
 border-radius: 15px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+
+&:hover {
+  background-color: #4D94E6;
+  color: #fff;
+  ${Active} {
+    color: #fff;
+  }
+}
 `
