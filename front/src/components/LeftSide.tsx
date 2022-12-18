@@ -30,14 +30,16 @@ export default function LeftSide() {
           />
           복습 퀴즈 풀기
         </NavItem>
-        <NavItem>
-          <img 
-          src={`${process.env.PUBLIC_URL}/assets/noteicon.png`} 
-          alt='아이콘'
-          style={{marginRight: "10px"}}
-          />
-          단어장 보러가기
-        </NavItem>
+        <Link to="/notebook">
+          <NavItem>
+            <img 
+            src={`${process.env.PUBLIC_URL}/assets/noteicon.png`} 
+            alt='아이콘'
+            style={{marginRight: "10px"}}
+            />
+            단어장 보러가기
+          </NavItem>
+        </Link>
       </Nav>
     </LeftSideBase>
   )

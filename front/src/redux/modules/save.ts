@@ -1,9 +1,9 @@
 import { AnyAction } from 'redux';
 import { createActions, handleActions } from "redux-actions"
-import { call, put, takeEvery } from "redux-saga/effects"
+import { call, put, takeEvery, select } from "redux-saga/effects"
 import axios from 'axios';
 
-import { SaveReqType } from "../../types";
+import { SaveReqType, wordList, DeleteType } from "../../types";
 
 
 export interface SaveState {
@@ -52,10 +52,11 @@ export default reducer
 
 
 //saga
-export const { saving } = createActions("SAVING", {prefix})
+export const { saving, deleteWord } = createActions("SAVING","DELETE_WORD", {prefix})
 
 export function* saveSaga() {
   yield takeEvery(`${prefix}/SAVING`, savingSaga)
+  yield takeEvery(`${prefix}/DELETE_WORD`, deleteWordSaga)
 }
 
 interface saveSagaAction extends AnyAction {
@@ -75,5 +76,28 @@ function* savingSaga(action:saveSagaAction) {
     yield put(success(word))
   } catch(error) {
     yield put(fail('UNKNOWN_ERROR'))
+  }
+}
+
+interface deleteWordSagaAction extends AnyAction {
+  payload:  DeleteType
+}
+
+async function deleteAPI(deleteData: any): Promise<string> {
+  return await axios.delete('http://localhost:3001/api/save', {params: {
+    idTest :deleteData}
+  })
+}
+
+function* deleteWordSaga(action: deleteWordSagaAction) {
+  try {
+    const { idTest } = action.payload;
+    yield put(pending())
+    yield call(deleteAPI, idTest)
+    const word: wordList[] = yield select(state=>state.save.word)
+    yield put(success(word.filter((word) => word.idTest !== idTest)))
+    window.location.reload()
+  } catch (error) {
+    yield put(fail('UNKNOWN_ERROR'));
   }
 }

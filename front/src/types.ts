@@ -1,4 +1,5 @@
 import { AuthState } from "./redux/modules/auth";
+import { SaveState } from "./redux/modules/save";
 
 export type LoginReqType = {
   email: string
@@ -12,8 +13,12 @@ export type ActiveReqType = {
 
 export type SaveReqType = {
   word: string
-  meaning: String
+  meaning: string
   idUser: number
+}
+
+export type DeleteType = {
+  idTest: Number
 }
 
 export type DayWords = {
@@ -28,8 +33,16 @@ export type UserType = {
   idUser: number
 }
 
+export type wordList = {
+  voca: string
+  meaning: string
+  idUser: number
+  idTest: number
+}
+
 export interface RootState {
   auth: AuthState
+  save: SaveState
 }
 
 export interface DayType {

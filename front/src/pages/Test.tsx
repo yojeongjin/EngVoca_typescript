@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Main } from "../components/Main";
 import LeftSide from "../components/LeftSide";
-import { DayWords, RootState, SaveReqType, UserType } from "../types";
+import { DayWords, RootState, UserType } from "../types";
 import { saving } from "../redux/modules/save";
 
 import save from "../assets/save.png"
@@ -160,7 +160,6 @@ font-size: 14px;
 display: flex;
 justify-content: center;
 align-items: center;
-
 &:hover {
   ${TestItem1} {
     transform: rotateY(180deg);

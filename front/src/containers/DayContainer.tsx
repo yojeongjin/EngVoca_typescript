@@ -9,7 +9,6 @@ const DayContainer: React.FC = () => {
   useEffect(() => {
     axios.get('http://localhost:3001/api/day')
     .then((res) => {
-      console.log(res.data)
       setDayData(res.data)
     })
   },[])

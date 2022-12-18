@@ -29,8 +29,6 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive}) => {
     </PracticeItem>
   ))
 
-  console.log(dayData)
-
   return (
     <Main>
       <DayPracticeBase>
