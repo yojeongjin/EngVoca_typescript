@@ -73,8 +73,13 @@ function* loginSaga(action:LoginSagaAction) {
   try{
     yield put(pending())
     const user: UserType = yield call(loginAPI, action.payload)
-    yield put(success(user))
-    window.location.replace('/')
+
+    if(user === undefined) {
+      return alert('아이디와 비밀번호를 확인해주세요.')
+    } else {
+      yield put(success(user))
+      window.location.replace('/')
+    }
   } catch(error) {
     yield put(fail('UNKNOWN_ERROR'))
     alert('아이디와 비밀번호를 확인해주세요.')

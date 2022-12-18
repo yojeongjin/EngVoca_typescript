@@ -96,7 +96,6 @@ function* deleteWordSaga(action: deleteWordSagaAction) {
     yield call(deleteAPI, idTest)
     const word: wordList[] = yield select(state=>state.save.word)
     yield put(success(word.filter((word) => word.idTest !== idTest)))
-    window.location.reload()
   } catch (error) {
     yield put(fail('UNKNOWN_ERROR'));
   }

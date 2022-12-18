@@ -14,14 +14,16 @@ export default function LeftSide() {
       <ProfileContainer />
 
       <Nav>
-        <NavItem>
-          <img 
-          src={`${process.env.PUBLIC_URL}/assets/studyicon.png`} 
-          alt='아이콘'
-          style={{marginRight: "10px"}}
-          />
-          유형별 학습하기
-        </NavItem>
+        <Link to="/eachtype">
+          <NavItem>
+            <img 
+            src={`${process.env.PUBLIC_URL}/assets/studyicon.png`} 
+            alt='아이콘'
+            style={{marginRight: "10px"}}
+            />
+            유형별 학습하기
+          </NavItem>
+        </Link>
         <NavItem>
           <img 
           src={`${process.env.PUBLIC_URL}/assets/quizicon.png`} 

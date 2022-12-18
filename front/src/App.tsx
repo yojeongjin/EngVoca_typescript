@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Day from './pages/Day';
 import Test from './pages/Test';
 import Notebook from './pages/Notebook';
+import EachType from './pages/EachType';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
+          <Route path='/eachtype' element={<EachType />} />
           <Route path='/notebook' element={<Notebook />} />
           <Route path='/test/:idx' element = {<Test />} />
           <Route path='/day/:idx' element = {<Day />} />

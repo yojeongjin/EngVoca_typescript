@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { wordList, DeleteType } from '../types';
-import LeftSide from './LeftSide';
 import { Main } from './Main';
 
 interface NotebookProps {
@@ -10,7 +9,7 @@ interface NotebookProps {
 }
 
 const Notebook: React.FC<NotebookProps> = ({wordList,deleteWord}) => {
-  
+
   const clickDelete = (idx:any) => {
     let idTest = idx
     deleteWord({idTest})
@@ -39,9 +38,23 @@ const Notebook: React.FC<NotebookProps> = ({wordList,deleteWord}) => {
     </ContentWrap>
   ))
 
+  if (wordList?.length === 0) {
+    return (
+      <Main>
+      <NotebookBase>
+        <Inner>
+          <NoteContent>
+            <Content style={{fontSize: "14px", color: "#4D94E6", marginTop: "100px", textAlign: "center"}}>
+              💌 아직 저장된 단어가 없어요!
+            </Content>
+          </NoteContent>
+        </Inner>
+      </NotebookBase>
+    </Main>
+    )
+  } 
   return (
     <Main>
-      <LeftSide />
       <NotebookBase>
         <Inner>
           <NoteContent>
@@ -99,7 +112,7 @@ padding: 0 5px;
 `
 const Content = styled.div`
 width: 100%;
-margin-top: 35px;
+margin-top: 45px;
 `
 
 const ContentWrap = styled.div`

@@ -3,12 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../types";
 
 import SigninContainer from "../containers/SigninContainer";
-
 import LeftSide from "../components/LeftSide";
-import NotebookContainer from "../containers/NotebookContainer";
+import EachTypeList from "../components/EachTypeList";
 
-export default function Notebook() {
-  const token = useSelector<RootState , {} | null>((state) => state.auth.user)
+export default function EachType() {
+    const token = useSelector<RootState , {} | null>((state) => state.auth.user)
 
   if (token === null) {
     return <SigninContainer />
@@ -16,7 +15,8 @@ export default function Notebook() {
   return (
     <>
       <LeftSide />
-      <NotebookContainer />
+      <EachTypeList />
     </>
+
   )
 }
