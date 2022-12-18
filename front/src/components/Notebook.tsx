@@ -75,7 +75,6 @@ const Notebook: React.FC<NotebookProps> = ({wordList,deleteWord}) => {
 export default Notebook
 
 const NotebookBase = styled.div`
-
 `
 
 const Inner = styled.div`

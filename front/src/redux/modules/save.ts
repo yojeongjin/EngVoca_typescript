@@ -3,7 +3,7 @@ import { createActions, handleActions } from "redux-actions"
 import { call, put, takeEvery, select } from "redux-saga/effects"
 import axios from 'axios';
 
-import { SaveReqType, wordList, DeleteType } from "../../types";
+import { SaveReqType, wordList, DeleteType, GetWordType } from "../../types";
 
 
 export interface SaveState {
@@ -52,11 +52,12 @@ export default reducer
 
 
 //saga
-export const { saving, deleteWord } = createActions("SAVING","DELETE_WORD", {prefix})
+export const { saving, deleteWord,getWord } = createActions("SAVING","DELETE_WORD","GET_WORD", {prefix})
 
 export function* saveSaga() {
   yield takeEvery(`${prefix}/SAVING`, savingSaga)
   yield takeEvery(`${prefix}/DELETE_WORD`, deleteWordSaga)
+  yield takeEvery(`${prefix}/GET_WORD`, getWordSaga)
 }
 
 interface saveSagaAction extends AnyAction {
@@ -91,11 +92,35 @@ async function deleteAPI(deleteData: any): Promise<string> {
 
 function* deleteWordSaga(action: deleteWordSagaAction) {
   try {
-    const { idTest } = action.payload;
+    const { idTest } = action.payload
     yield put(pending())
     yield call(deleteAPI, idTest)
     const word: wordList[] = yield select(state=>state.save.word)
     yield put(success(word.filter((word) => word.idTest !== idTest)))
+    alert('삭제되었습니다.')
+  } catch (error) {
+    yield put(fail('UNKNOWN_ERROR'));
+  }
+}
+
+interface getWordSagaAction extends AnyAction {
+  payload:  GetWordType
+}
+
+async function getWordAPI(needData: any): Promise<string> {
+  const res = await axios.get('http://localhost:3001/api/save', {params: {
+    idUser: needData}
+  })
+
+  return res.data
+}
+
+function* getWordSaga(action: getWordSagaAction) {
+  try {
+    const { idUser } = action.payload
+    yield put(pending())
+    const word: []=yield call(getWordAPI, idUser)
+    yield put(success(word))
   } catch (error) {
     yield put(fail('UNKNOWN_ERROR'));
   }

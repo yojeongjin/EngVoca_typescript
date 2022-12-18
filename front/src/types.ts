@@ -21,6 +21,10 @@ export type DeleteType = {
   idTest: Number
 }
 
+export type GetWordType = {
+  idUser: Number
+}
+
 export type DayWords = {
   words: string
   meaning: string
@@ -30,7 +34,7 @@ export type DayWords = {
 
 export type UserType = {
   jwt: string
-  idUser: number
+  idUser: Number
 }
 
 export type wordList = {

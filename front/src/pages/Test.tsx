@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components'
 import axios from 'axios'
 import { useDispatch, useSelector } from "react-redux";
@@ -35,7 +35,7 @@ export default function Test() {
     })
   },[])
 
-  const saveWord = useCallback(() => {
+  useEffect(() => {
     let idUser = user?.idUser
     dispatch(saving({word, meaning, idUser}))
   }, [dispatch, word, meaning])
@@ -44,8 +44,6 @@ export default function Test() {
     words[idx].isSave = true
     setWord(words[idx].words)
     setMeaning(words[idx].meaning)
-
-    saveWord()
   }
 
   const wordsDetail =

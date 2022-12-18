@@ -20,7 +20,6 @@ exports.add = (req,res) => {
 
 exports.delete = (req,res) => { 
 	const { idTest } = req.query
-	console.log(req.query)
 
 	conn.query("delete from mydb_type.Test where idTest = ?",[ idTest ],(err,row) => { 
 		if(err) throw err;
@@ -30,5 +29,15 @@ exports.delete = (req,res) => {
 			code: 200,
 			msg:'삭제되었습니다.'
 		})
+	})
+}
+
+
+exports.list = (req,res) => { 
+	const { idUser } = req.query
+
+	conn.query("select * from mydb_type.Test where idUser = ?",[ idUser ],(err,row) => { 
+		if(err) throw err;
+		res.send(row)
 	})
 }
