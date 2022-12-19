@@ -11,6 +11,7 @@ import Notebook from './pages/Notebook';
 import EachType from './pages/EachType';
 import Basic from './pages/Basic'
 import Join from './pages/Join'
+import Repeat from './pages/Repeat';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
+          <Route path='/repeat' element={<Repeat />} />
           <Route path='/join' element={<Join />} />
           <Route path='/900' element={<Basic />} />
           <Route path='/800' element={<Basic />} />

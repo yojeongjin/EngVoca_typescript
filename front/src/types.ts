@@ -52,6 +52,7 @@ export type UserType = {
   idUser: number
   UserName: string
   UserEmail: string
+  UserImg: string
 }
 
 export type wordList = {

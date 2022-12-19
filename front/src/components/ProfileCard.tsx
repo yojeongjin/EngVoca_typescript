@@ -12,7 +12,7 @@ const ProfileCard: React.FC<ProfileProps> = ({logout, user}) => {
     <ProfileCardBase>
       <ProfileImg>
         <img 
-        src={`${process.env.PUBLIC_URL}/assets/penguin.png`} 
+        src={user.UserImg} 
         alt='프로필사진' 
         style={{width: "90%", height: "90%"}}
         />

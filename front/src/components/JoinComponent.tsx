@@ -115,9 +115,16 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
             ref={emailRef}
             />
 
-            <ContentWrap onClick={checkHandler} isCheck={isCheck === true}>
-              이메일 중복확인
-            </ContentWrap>
+            {
+              isCheck ? 
+              <ContentWrap isCheck={isCheck === true} disabled>
+                이메일 중복확인
+              </ContentWrap>
+              :
+              <ContentWrap onClick={checkHandler} isCheck={isCheck === true}>
+                이메일 중복확인
+              </ContentWrap>
+            }
           </InputWrap>
 
           <InputWrap style={{marginTop: "10px"}}>
@@ -237,7 +244,7 @@ background-color: #4D94E6;
 color: #fff;
 `
 
-const ContentWrap = styled.div<{isCheck: boolean}>`
+const ContentWrap = styled.button<{isCheck: boolean}>`
 width: 100px;
 padding: 7px 10px;
 font-size: 12px;

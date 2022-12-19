@@ -24,14 +24,16 @@ export default function LeftSide() {
             유형별 학습하기
           </NavItem>
         </Link>
-        <NavItem>
-          <img 
-          src={`${process.env.PUBLIC_URL}/assets/quizicon.png`} 
-          alt='아이콘'
-          style={{marginRight: "10px"}}
-          />
-          복습 퀴즈 풀기
-        </NavItem>
+        <Link to="/repeat">
+          <NavItem>
+            <img 
+            src={`${process.env.PUBLIC_URL}/assets/quizicon.png`} 
+            alt='아이콘'
+            style={{marginRight: "10px"}}
+            />
+            복습 퀴즈 풀기
+          </NavItem>
+        </Link>
         <Link to="/notebook">
           <NavItem>
             <img 
