@@ -91,6 +91,6 @@ function* logoutSaga() {
     yield put(pending())
     yield put(success(null))
   } catch(error) {
-    console.log(error)
+    yield put(fail('UNKNOWN_ERROR'))
   }
 }

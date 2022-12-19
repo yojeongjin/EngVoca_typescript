@@ -1,9 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, DeleteType, UserType } from '../types';
 import Notebook from '../components/Notebook';
 import { deleteWord as deleteWordSagaStart, getWord as getWordSagaStart } from '../redux/modules/save';
-import { useEffect } from 'react';
 
 const NotebookContainer: React.FC = () => {
   const dispatch = useDispatch()

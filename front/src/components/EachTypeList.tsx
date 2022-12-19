@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { Main } from './Main';
 
@@ -9,29 +10,41 @@ const EachTypeList: React.FC = () => {
       <EachTypeBase>
         <Inner>
           <ContetnWrap>
-            <Content>
-              <img style={{marginBottom: "10px"}}
-              src={`${process.env.PUBLIC_URL}/assets/dictionary.png`} alt='로고' />
-              기본 완성
-            </Content>
-            <Content>
-              <img style={{marginBottom: "10px"}}
-              src={`${process.env.PUBLIC_URL}/assets/audio-book.png`} alt='로고' />
-              필수 LC/RC 단어
-            </Content>
-            <Content>
-              <img style={{marginBottom: "10px"}}
-              src={`${process.env.PUBLIC_URL}/assets/700score.png`} alt='로고' />
-              도전! 700점 완성
-            </Content>
-            <Content>
-              <img style={{marginBottom: "10px"}}
-              src={`${process.env.PUBLIC_URL}/assets/800score.png`} alt='로고' />
-              도전! 800점 완성</Content>
-            <Content>
-              <img style={{marginBottom: "10px"}}
-              src={`${process.env.PUBLIC_URL}/assets/900score.png`} alt='로고' />
-              도전! 900점 완성</Content>
+            <Link to="/basic">
+              <Content>
+                <img style={{marginBottom: "10px"}}
+                src={`${process.env.PUBLIC_URL}/assets/dictionary.png`} alt='로고' />
+                기본 완성
+              </Content>
+            </Link>
+            <Link to="/LCRC">
+              <Content>
+                <img style={{marginBottom: "10px"}}
+                src={`${process.env.PUBLIC_URL}/assets/audio-book.png`} alt='로고' />
+                필수 LC/RC 단어
+              </Content>
+            </Link>
+            <Link to="/700">
+              <Content>
+                <img style={{marginBottom: "10px"}}
+                src={`${process.env.PUBLIC_URL}/assets/700score.png`} alt='로고' />
+                도전! 700점 완성
+              </Content>
+            </Link>
+            <Link to="/800">
+              <Content>
+                <img style={{marginBottom: "10px"}}
+                src={`${process.env.PUBLIC_URL}/assets/800score.png`} alt='로고' />
+                도전! 800점 완성
+              </Content>
+            </Link>
+            <Link to="/900">
+              <Content>
+                <img style={{marginBottom: "10px"}}
+                src={`${process.env.PUBLIC_URL}/assets/900score.png`} alt='로고' />
+                도전! 900점 완성
+              </Content>
+            </Link>
           </ContetnWrap>
         </Inner>
       </EachTypeBase>
@@ -44,6 +57,7 @@ export default EachTypeList
 const EachTypeBase = styled.div`
 font-size: 14px;
 font-weight: bold;
+color: #34314c;
 `
 
 const Inner = styled.div`
@@ -66,7 +80,7 @@ const ContentMove = keyframes`
 `
 
 const Content = styled.div`
-margin: 0 auto;
+margin: 0 10px;
 width: 280px;
 height: 200px;
 background-color: #fff;

@@ -18,11 +18,11 @@ export type SaveReqType = {
 }
 
 export type DeleteType = {
-  idTest: Number
+  idTest: number
 }
 
 export type GetWordType = {
-  idUser: Number
+  idUser: number
 }
 
 export type DayWords = {
@@ -32,9 +32,16 @@ export type DayWords = {
   isSave: boolean
 }
 
+export type EachWords = {
+  voca: string
+  meaning: string
+  chapter: string
+  idAllVoca: number
+}
+
 export type UserType = {
   jwt: string
-  idUser: Number
+  idUser: number
 }
 
 export type wordList = {

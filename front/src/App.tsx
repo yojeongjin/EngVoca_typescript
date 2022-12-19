@@ -9,6 +9,7 @@ import Day from './pages/Day';
 import Test from './pages/Test';
 import Notebook from './pages/Notebook';
 import EachType from './pages/EachType';
+import Basic from './pages/Basic'
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
+          <Route path='/900' element={<Basic />} />
+          <Route path='/800' element={<Basic />} />
+          <Route path='/700' element={<Basic />} />
+          <Route path='/LCRC' element={<Basic />} />
+          <Route path='/basic' element={<Basic />} />
           <Route path='/eachtype' element={<EachType />} />
           <Route path='/notebook' element={<Notebook />} />
           <Route path='/test/:idx' element = {<Test />} />

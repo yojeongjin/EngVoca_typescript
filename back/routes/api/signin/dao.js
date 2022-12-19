@@ -26,6 +26,7 @@ exports.view = (req,res) => {
 				msg:'회원정보가 존재하지 않습니다.'
 			})
     } else {
+      console.log(rows[0])
       const { idUser, UserName } = rows[0]
       const secret = process.env.SECRETKEY
 
@@ -34,7 +35,7 @@ exports.view = (req,res) => {
         secret
       )
       return res.send({
-        result: { jwt: token, idUser: idUser },
+        result: { jwt: token, idUser: idUser, UserName: UserName },
         success: true,
         code: 200,
         msg:'로그인 성공'

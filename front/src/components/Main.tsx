@@ -5,7 +5,6 @@ interface MainProps {
   children: ReactNode
 }
 
-
 export const Main = ({children}:MainProps) => {
 
   return (

@@ -99,12 +99,12 @@ function* deleteWordSaga(action: deleteWordSagaAction) {
     yield put(success(word.filter((word) => word.idTest !== idTest)))
     alert('삭제되었습니다.')
   } catch (error) {
-    yield put(fail('UNKNOWN_ERROR'));
+    yield put(fail('UNKNOWN_ERROR'))
   }
 }
 
 interface getWordSagaAction extends AnyAction {
-  payload:  GetWordType
+  payload: GetWordType
 }
 
 async function getWordAPI(needData: any): Promise<string> {
@@ -122,6 +122,6 @@ function* getWordSaga(action: getWordSagaAction) {
     const word: []=yield call(getWordAPI, idUser)
     yield put(success(word))
   } catch (error) {
-    yield put(fail('UNKNOWN_ERROR'));
+    yield put(fail('UNKNOWN_ERROR'))
   }
 }
