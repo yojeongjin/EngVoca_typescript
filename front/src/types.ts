@@ -6,6 +6,14 @@ export type LoginReqType = {
   password: string
 }
 
+export type JoinReqType = {
+  email: string
+  password: string
+  repassword: string
+  name: string
+  img: string
+}
+
 export type ActiveReqType = {
   active: string
   day: number
@@ -42,6 +50,8 @@ export type EachWords = {
 export type UserType = {
   jwt: string
   idUser: number
+  UserName: string
+  UserEmail: string
 }
 
 export type wordList = {

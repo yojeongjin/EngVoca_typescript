@@ -3,7 +3,7 @@ import { createActions, handleActions } from "redux-actions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
-import { LoginReqType, UserType } from "../../types";
+import { JoinReqType, LoginReqType, UserType } from "../../types";
 
 export interface AuthState {
   user: UserType | null;
@@ -51,12 +51,13 @@ const reducer = handleActions<AuthState,any>(
 export default reducer
 
 //saga
-export const { login, logout } = createActions("LOGIN", "LOGOUT", {prefix})
+export const { login, logout, join } = createActions("LOGIN", "LOGOUT", "JOIN", {prefix})
 
 
 export function* authSaga() {
   yield takeEvery(`${prefix}/LOGIN`, loginSaga)
   yield takeEvery(`${prefix}/LOGOUT`, logoutSaga)
+  yield takeEvery(`${prefix}/JOIN`, joinSaga)
 }
 
 interface LoginSagaAction extends AnyAction {
@@ -92,5 +93,30 @@ function* logoutSaga() {
     yield put(success(null))
   } catch(error) {
     yield put(fail('UNKNOWN_ERROR'))
+  }
+}
+
+
+interface JoinSagaAction extends AnyAction {
+  payload: JoinReqType;
+}
+
+async function joinAPI(joinData: JoinReqType): Promise<string> {
+  const res = await axios.post('http://localhost:3001/api/join', joinData)
+  
+  return res.data.result
+}
+
+function* joinSaga(action: JoinSagaAction) {
+  
+  try{
+    yield put(pending())
+    const user: UserType = yield call(joinAPI, action.payload)
+    yield put(success(user))
+    alert('회원가입이 완료되었습니다!')
+    window.location.replace('/')
+  } catch(error) {
+    yield put(fail('UNKNOWN_ERROR'))
+    alert('오류가 발생하였습니다.')
   }
 }

@@ -10,6 +10,7 @@ import Test from './pages/Test';
 import Notebook from './pages/Notebook';
 import EachType from './pages/EachType';
 import Basic from './pages/Basic'
+import Join from './pages/Join'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
+          <Route path='/join' element={<Join />} />
           <Route path='/900' element={<Basic />} />
           <Route path='/800' element={<Basic />} />
           <Route path='/700' element={<Basic />} />

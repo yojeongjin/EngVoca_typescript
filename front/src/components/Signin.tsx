@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { LoginReqType } from '../types';
@@ -34,7 +35,7 @@ const Signin: React.FC<SigninProps> = ({login}) => {
         <SigninContent>
           <SigninTitle style={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
             <img 
-            src={`${process.env.PUBLIC_URL}/assets/signlogo.webp`} alt='로고' 
+            src={`${process.env.PUBLIC_URL}/assets/small-logo.webp`} alt='로고' 
             style={{width:"40%", height: "50%"}}
             />
             <p style={{color: '#34314c', fontSize: '13px'}}>로그인이 필요한 서비스입니다.</p>
@@ -60,9 +61,11 @@ const Signin: React.FC<SigninProps> = ({login}) => {
 
           <BtnWrap>
             <Button onClick={signinHandler}>로그인</Button>
-            <Button
-            style={{backgroundColor: "transparent", border: "1px solid #4d94e6", color: "#4d94e6"}}
-            >회원가입</Button>
+            <Link to="/join">
+              <Button
+              style={{backgroundColor: "transparent", border: "1px solid #4d94e6", color: "#4d94e6"}}
+              >회원가입</Button>
+            </Link>
           </BtnWrap>
         </SigninContent>
 
@@ -74,8 +77,6 @@ const Signin: React.FC<SigninProps> = ({login}) => {
 export default Signin
 
 const SigninBase = styled.div`
-font-family: 'AppleSDGothicNeo';
-font-weight: 500;
 `
 
 const Inner = styled.div `
@@ -124,6 +125,7 @@ padding: 16px;
 font-size: 14px;
 &:focus {
   border-color: #34314c;
+  background-color: #fff;
 }
 `
 

@@ -1,11 +1,13 @@
 import React  from 'react';
 import styled from 'styled-components';
+import { UserType } from '../types';
 
 interface ProfileProps {
   logout: () => void
+  user: UserType
 }
 
-const ProfileCard: React.FC<ProfileProps> = ({logout}) => {
+const ProfileCard: React.FC<ProfileProps> = ({logout, user}) => {
   return (
     <ProfileCardBase>
       <ProfileImg>
@@ -17,9 +19,10 @@ const ProfileCard: React.FC<ProfileProps> = ({logout}) => {
       </ProfileImg>
       <ProfileContent>
         <SpanWrap>
-          <span>Lv. </span>
-          <span style={{marginRight: '5px'}}>1 </span>
-          <span>쌀구</span>
+          <span>{user.UserName}</span>
+        </SpanWrap>
+        <SpanWrap style={{fontWeight: "400", color: "#555"}}>
+          <span>{user.UserEmail}</span>
         </SpanWrap>
         <Logout onClick={logout}>로그아웃</Logout>
       </ProfileContent>
@@ -51,8 +54,8 @@ justify-content: center;
 `
 
 const SpanWrap = styled.div`
-font-family: 'AppleSDGothicNeo';
-font-weight: 500;
+font-size: 15px;
+padding: 0 6px;
 `
 const ProfileContent = styled.div`
 flex: 1;
