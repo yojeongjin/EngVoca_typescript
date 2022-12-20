@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from 'styled-components'
 import axios from 'axios'
 import { useParams, Link } from "react-router-dom";
 import { Main } from "../components/Main";
 import LeftSide from "../components/LeftSide";
-import { DayWords } from "../types";
+import { DayWords, RootState, UserType } from "../types";
 
 export default function Day() {
+  const user = useSelector<RootState , UserType | null>((state) => state.auth.user)
   const params = useParams()
   const idx = params.idx
 
@@ -24,11 +26,14 @@ export default function Day() {
     })
   },[])
 
+  console.log(idx)
 
   const changeActive = () => {
+    let idUser = user.idUser
     let reqData = {
+      Day: idx,
       active: '학습 완료',
-      day: idx
+      idUser: idUser
     }
     axios.patch('http://localhost:3001/api/day', reqData)
     .then((res) => {

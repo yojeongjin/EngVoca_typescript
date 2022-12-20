@@ -3,17 +3,19 @@ const conn =  db.init();
 
 
 exports.list = (req,res) => { 
-	conn.query("select * from mydb_type.Day",(err,row) => { 
+	const { idUser } = req.query
+
+	conn.query("select * from mydb_type.Day where idUser =  ?",[ idUser ],(err,row) => { 
 		if(err) throw err;
 		res.send(row)
 	})
 }
 
 exports.modify = (req,res) => { 
-	const { active, day } = req.body
+	const { Day, active, idUser } = req.body
 
-	sql = "update mydb_type.Day set DayActive = ? where idDay = ?"
-	conn.query(sql,[ active, day ],(err,row) => { 
+	const sql = `update mydb_type.Day set ${Day} = ? where idUser = ?`
+	conn.query(sql,[ active, idUser ],(err,row) => { 
 		if(err) throw err;
 
 		return res.send({

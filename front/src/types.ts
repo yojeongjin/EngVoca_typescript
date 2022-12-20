@@ -16,8 +16,9 @@ export type JoinReqType = {
 }
 
 export type ActiveReqType = {
+  Day: string
   active: string
-  day: number
+  idUser: number
 }
 
 export type SaveReqType = {
@@ -75,7 +76,3 @@ export interface RootState {
   test: TestState
 }
 
-export interface DayType {
-  idDay:number
-  DayActive: string
-}

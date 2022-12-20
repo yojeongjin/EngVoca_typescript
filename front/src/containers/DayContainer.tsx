@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 import DayPractice from '../components/DayPractice';
-import { ActiveReqType,DayType } from '../types';
+import { RootState, UserType, ActiveReqType } from '../types';
 import axios from 'axios';
 
 const DayContainer: React.FC = () => {
-  const [ dayData, setDayData ] = useState<DayType[] | null>([])
+  const user = useSelector<RootState , UserType | null>((state) => state.auth.user)
+  let idUser = user.idUser
+  const [ dayData, setDayData ] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/day')
+    axios.get('http://localhost:3001/api/day', {params: {
+      idUser: idUser
+    }})
     .then((res) => {
-      setDayData(res.data)
+      let data = Object.entries(res.data[0]).slice(2)
+      setDayData(data)
     })
   },[])
 
@@ -21,7 +27,7 @@ const DayContainer: React.FC = () => {
   }
 
   return (
-    <DayPractice  dayData={dayData} changeActive={changeActive} />
+    <DayPractice  dayData={dayData} changeActive={changeActive} idUser={idUser} />
   )
 }
 

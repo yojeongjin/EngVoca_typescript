@@ -1,39 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ActiveReqType, DayType } from '../types';
+import { ActiveReqType } from '../types';
 import { Main } from './Main';
 
 
 interface DayProps {
-  dayData: DayType[] | null
+  dayData: any[] | null
   changeActive: (reqData: ActiveReqType) => void
+  idUser: number
 }
 
-const DayPractice: React.FC<DayProps> = ({dayData, changeActive}) => {
+const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
 
-  const changeHandler = (day:any) => {
+  const changeHandler = (Day: any) => {
     const active = '학습 진행 중'
-    changeActive({active, day})
+    changeActive({Day, active, idUser})
   }
-
-  const dayDetail = 
-  dayData?.map((day) => (
-    <Link to={"/day/" + day.idDay}  key={day.idDay} >
+  
+  const dayDetail =
+  dayData.map((day) => (
+    <Link to={"/day/" + day[0]}>
       {
-        day.DayActive === "학습 완료" ?
-        <PracticeItem onClick={()=> {changeHandler(day.idDay)}}
+        day[1] === '학습 완료' ?
+        <PracticeItem onClick={() => {changeHandler(day[0])}}
         style={{backgroundColor: "#eee", border: "1px solid #eee", color: "#333"}}>
-          Day {day.idDay} 
-          <Active style={{color: "#333"}}>{day.DayActive}</Active>
+          {day[0]}
+          <Active style={{color: "#333"}}>{day[1]}</Active>
         </PracticeItem>
         :
-        <PracticeItem onClick={()=> {changeHandler(day.idDay)}}>
-          Day {day.idDay} 
-          <Active>{day.DayActive}</Active>
+        <PracticeItem onClick={() => {changeHandler(day[0])}}>
+          {day[0]}
+          <Active>{day[1] === 'null' ? '' : day[1]}</Active>
         </PracticeItem>
       }
-
     </Link>
   ))
 
