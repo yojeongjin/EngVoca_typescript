@@ -14,10 +14,18 @@ exports.add = (req,res) => {
       const userIdx = rows.insertId;
       const secret = process.env.SECRETKEY
 
+      if (rows.length !==0) {
+        sql = "insert into mydb_type.Day (idUser) values (?)";
+        conn.query(sql,[ userIdx ],(err,rows)=>{
+          if(err) throw err;
+        })
+      }
+
       const token = jwt.sign(
         { userIdx: userIdx, UserName: name },
         secret
       )
+      
 
       res.send({
         result: { jwt: token, idUser: userIdx, UserName: name, UserEmail: email, UserImg: img },
