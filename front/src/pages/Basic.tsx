@@ -1,15 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../types";
 
 import SigninContainer from "../containers/SigninContainer";
 import LeftSide from "../components/LeftSide";
 import BasicList from "../components/BasicList";
+import useUser from "../hooks/useUser";
 
 export default function EachType() {
-    const token = useSelector<RootState , {} | null>((state) => state.auth.user)
+    const user = useUser()
 
-  if (token === null) {
+  if (user === null) {
     return <SigninContainer />
   }
   return (

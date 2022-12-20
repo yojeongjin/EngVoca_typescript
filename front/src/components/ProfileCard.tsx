@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { UserType } from '../types';
 
@@ -18,15 +18,19 @@ const ProfileCard: React.FC<ProfileProps> = ({logout, user}) => {
         />
       </ProfileImg>
       <ProfileContent>
-        <SpanWrap>
+        <SpanWrap style={{display: "flex", justifyContent: "space-between"}}>
           <span>{user.UserName}</span>
+          {/* <button 
+          type='button'
+          style={{fontSize:"12px", fontWeight: "300", color: "#555", padding:"0 7px"}}>
+            수정
+          </button> */}
         </SpanWrap>
         <SpanWrap style={{fontWeight: "400", color: "#555"}}>
           <span>{user.UserEmail}</span>
         </SpanWrap>
         <Logout onClick={logout}>로그아웃</Logout>
       </ProfileContent>
-
     </ProfileCardBase>
   )
 }

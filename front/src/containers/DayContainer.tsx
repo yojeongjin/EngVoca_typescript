@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from "react-redux";
 import DayPractice from '../components/DayPractice';
-import { RootState, UserType, ActiveReqType } from '../types';
+import { ActiveReqType } from '../types';
 import axios from 'axios';
+import useUser from '../hooks/useUser';
 
 const DayContainer: React.FC = () => {
-  const user = useSelector<RootState , UserType | null>((state) => state.auth.user)
+  const user = useUser()
   let idUser = user.idUser
   const [ dayData, setDayData ] = useState([])
 

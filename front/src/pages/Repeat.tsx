@@ -1,15 +1,14 @@
 import React from 'react'
-import { useSelector } from "react-redux";
-import { RootState } from "../types";
 
 import LeftSide from '../components/LeftSide'
 import RepeatContainer from '../containers/RepeatContainer'
 import SigninContainer from '../containers/SigninContainer'
+import useUser from '../hooks/useUser';
 
 const Repeat: React.FC = () => {
-  const token = useSelector<RootState , {} | null>((state) => state.auth.user)
+  const user = useUser()
 
-  if (token === null) {
+  if (user === null) {
     return <SigninContainer />
   }
 

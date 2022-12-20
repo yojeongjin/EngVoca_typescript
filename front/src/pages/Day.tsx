@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import styled from 'styled-components'
 import axios from 'axios'
 import { useParams, Link } from "react-router-dom";
 import { Main } from "../components/Main";
 import LeftSide from "../components/LeftSide";
-import { DayWords, RootState, UserType } from "../types";
+import { DayWords } from "../types";
+import useUser from "../hooks/useUser";
 
 export default function Day() {
-  const user = useSelector<RootState , UserType | null>((state) => state.auth.user)
+  const user = useUser()
   const params = useParams()
   const idx = params.idx
 

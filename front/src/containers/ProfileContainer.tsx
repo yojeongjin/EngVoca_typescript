@@ -1,14 +1,13 @@
-import React  from 'react';
-import { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, UserType } from '../types';
+import React, { useCallback }   from 'react';
+import { useDispatch } from 'react-redux';
 import ProfileCard from '../components/ProfileCard';
 import { persistor } from '../redux/create';
 import { logout as logoutSagaStart } from '../redux/modules/auth';
+import useUser from '../hooks/useUser';
 
 export default function ProfileContainer() {
   const dispatch = useDispatch()
-  const user = useSelector<RootState , UserType | null>((state) => state.auth.user)
+  const user = useUser()
 
   const logout = useCallback(async ()=> {
     const purge = async () => {

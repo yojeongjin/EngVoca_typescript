@@ -31,7 +31,7 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
         :
         <PracticeItem onClick={() => {changeHandler(day[0])}}>
           {day[0]}
-          <Active>{day[1] === 'null' ? '' : day[1]}</Active>
+          <Active>{day[1]}</Active>
         </PracticeItem>
       }
     </Link>

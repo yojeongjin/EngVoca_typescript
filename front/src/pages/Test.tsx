@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components'
 import axios from 'axios'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Main } from "../components/Main";
 import LeftSide from "../components/LeftSide";
-import { DayWords, RootState, UserType } from "../types";
+import { DayWords } from "../types";
 import { saving } from "../redux/modules/save";
 
 import save from "../assets/save.png"
 import saved from "../assets/saved.png"
+import useUser from "../hooks/useUser";
 
 
 export default function Test() {
   const params = useParams()
   const idx = params.idx
   const dispatch = useDispatch()
-  const user = useSelector<RootState , UserType | null>((state) => state.auth.user)
+  const user = useUser()
 
   const [ words, setWords ] = useState<DayWords[]>([])
   const [ word, setWord ] = useState<string>(null)
