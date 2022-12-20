@@ -19,8 +19,8 @@ export default function Test() {
   const user = useSelector<RootState , UserType | null>((state) => state.auth.user)
 
   const [ words, setWords ] = useState<DayWords[]>([])
-  const [ word, setWord ] = useState<string>('')
-  const [ meaning, setMeaning ] = useState<string>('')
+  const [ word, setWord ] = useState<string>(null)
+  const [ meaning, setMeaning ] = useState<string>(null)
 
 
   useEffect(() => {
@@ -36,9 +36,13 @@ export default function Test() {
   },[])
 
   useEffect(() => {
+    if (word === null && meaning === null) {
+      return
+    }
     let idUser = user?.idUser
     dispatch(saving({word, meaning, idUser}))
-  }, [dispatch, word, meaning])
+
+  }, [dispatch,word, meaning])
 
   const handleClick = (idx:any) => {
     words[idx].isSave = true
