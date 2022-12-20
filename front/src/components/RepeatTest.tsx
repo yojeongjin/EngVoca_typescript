@@ -1,23 +1,26 @@
 import React, { useEffect, useState, useRef }  from 'react'
 
 import styled from 'styled-components'
+import { TestType } from '../types'
 import { Main } from './Main'
 
 interface RepeatTestProps {
-  getVoca: string[] | null
-  getMeaning: string[] | null
+  test: TestType[] | null
 }
 
-const RepeatTest: React.FC<RepeatTestProps> = ({getVoca, getMeaning}) => {
+const RepeatTest: React.FC<RepeatTestProps> = ({test}) => {
   const [ answer, setAnswer ] = useState('')
   const [ answerList, setAnswerList ] = useState([])
   const [ count, setCount ] = useState(3)
   const [ timer, setTimer ] = useState<number>(0)
-  const [ countCheck , setCountCheck ] = useState<boolean>(false)
   const [ stage, setStage ] = useState(0)
-  const [ vocaList, setVocaList ] = useState(getVoca[0])
-  const [ testStart, setTestStart ] = useState(true)
-  const [ testEnd, setTestEnd ] = useState(false)
+  const [ vocaList, setVocaList ] = useState('')
+  const [ countCheck , setCountCheck ] = useState<boolean>(false)
+  const [ testStart, setTestStart ] = useState<boolean>(true)
+  const [ testEnd, setTestEnd ] = useState<boolean>(false)
+
+  const getVoca = test.map((test)=>test.voca)
+  const getMeaning = test.map((test)=>test.meaning)
 
   const countId = useRef(null)
   const timerId = useRef(null)
@@ -49,12 +52,13 @@ const RepeatTest: React.FC<RepeatTestProps> = ({getVoca, getMeaning}) => {
     if (timer <= 0) {
       clearInterval(timerId.current)
       nextStage()
-    }
+    } 
   },[timer])
 
-  console.log(answerList)
+  
   const nextStage = () => {
     setAnswerList([...answerList, answer])
+    setAnswer('')
     setTimer(5)
     setStage(stage + 1)
     setVocaList(getVoca[stage])
@@ -64,8 +68,19 @@ const RepeatTest: React.FC<RepeatTestProps> = ({getVoca, getMeaning}) => {
     if(answerList.length === 11){
       setCountCheck(false)
       setTestEnd(true)
+      clearInterval(timerId.current)
     }
   },[answerList])
+
+  const handleOnClick = () => {
+    nextStage()
+  }
+
+  const handleOnKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleOnClick()
+    }
+  }
 
   const answerWord = 
   getVoca.map((voca) => (
@@ -81,7 +96,6 @@ const RepeatTest: React.FC<RepeatTestProps> = ({getVoca, getMeaning}) => {
   answerList.map((answer) => (
     <WordItem>{answer}</WordItem>
   ))
-
 
   return (
     <Main>
@@ -108,8 +122,15 @@ const RepeatTest: React.FC<RepeatTestProps> = ({getVoca, getMeaning}) => {
               <QandASection>
                 <AnswerInput 
                 placeholder='정답을 입력해주세요.'
+                value={answer}
                 onChange={(e)=>setAnswer(e.target.value)}
+                onKeyPress={handleOnKeyPress}
                 />
+                <AnswerBtn onClick={handleOnClick}>
+                  <img 
+                  style={{width: "20px", height:"20px"}}
+                  src={`${process.env.PUBLIC_URL}/assets/sendicon.png`} alt="전송아이콘" />
+                </AnswerBtn>
               </QandASection>
             </RepeatContent>
           }
@@ -188,10 +209,11 @@ flex-direction: column;
 `
 
 const QandASection = styled.div`
+display: flex;
+position: relative;
 width: 300px;
 height: 50px;
 margin: 40px 0;
-
 `
 
 const QuestionSection = styled.div`
@@ -208,9 +230,15 @@ border-radius: 12px;
 const AnswerInput = styled.input`
 width: 100%;
 height: 30px;
-padding: 5px 15px;
+padding: 5px 20px;
 border: none;
 border-bottom: 1px solid #4D94E6;
+`
+
+const AnswerBtn = styled.button`
+position: absolute;
+top: 5px;
+right: 0;
 `
 
 const Timer = styled.div`
@@ -264,4 +292,3 @@ box-shadow : 6px 0px 6px -8px;
 top: -50px;
 right: 0;
 `
-
