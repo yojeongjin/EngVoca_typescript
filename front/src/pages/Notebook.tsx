@@ -6,7 +6,7 @@ import LeftSide from "../components/LeftSide";
 import NotebookContainer from "../containers/NotebookContainer";
 import useUser from "../hooks/useUser";
 
-export default function Notebook() {
+const Notebook: React.FC = () => {
   const user = useUser()
 
   if (user === null) {
@@ -19,3 +19,5 @@ export default function Notebook() {
     </>
   )
 }
+
+export default Notebook

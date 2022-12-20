@@ -1,7 +1,9 @@
 import React from "react";
 import JoinContainer from "../containers/JoinContainer";
 
-export default function Join() {
+const Join: React.FC = () => {
 
 return <JoinContainer />
 }
+
+export default Join

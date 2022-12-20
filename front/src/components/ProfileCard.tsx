@@ -5,9 +5,10 @@ import { UserType } from '../types';
 interface ProfileProps {
   logout: () => void
   user: UserType
+  editHandler: () => void
 }
 
-const ProfileCard: React.FC<ProfileProps> = ({logout, user}) => {
+const ProfileCard: React.FC<ProfileProps> = ({logout, user, editHandler}) => {
   return (
     <ProfileCardBase>
       <ProfileImg>
@@ -20,11 +21,12 @@ const ProfileCard: React.FC<ProfileProps> = ({logout, user}) => {
       <ProfileContent>
         <SpanWrap style={{display: "flex", justifyContent: "space-between"}}>
           <span>{user.UserName}</span>
-          {/* <button 
+          <button 
+          onClick={editHandler}
           type='button'
           style={{fontSize:"12px", fontWeight: "300", color: "#555", padding:"0 7px"}}>
             수정
-          </button> */}
+          </button>
         </SpanWrap>
         <SpanWrap style={{fontWeight: "400", color: "#555"}}>
           <span>{user.UserEmail}</span>

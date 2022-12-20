@@ -4,7 +4,7 @@ import SigninContainer from "../containers/SigninContainer";
 import Home from "./Home";
 import useUser from "../hooks/useUser";
 
-export default function Signin() {
+const Signin: React.FC = () => {
   const user = useUser()
 
   if (user !== null) {
@@ -13,3 +13,5 @@ export default function Signin() {
 
   return <SigninContainer />
 }
+
+export default Signin

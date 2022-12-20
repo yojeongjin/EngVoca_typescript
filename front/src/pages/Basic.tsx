@@ -5,7 +5,7 @@ import LeftSide from "../components/LeftSide";
 import BasicList from "../components/BasicList";
 import useUser from "../hooks/useUser";
 
-export default function EachType() {
+const Basic: React.FC = () => {
     const user = useUser()
 
   if (user === null) {
@@ -19,3 +19,5 @@ export default function EachType() {
 
   )
 }
+
+export default Basic

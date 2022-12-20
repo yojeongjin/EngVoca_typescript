@@ -43,3 +43,19 @@ exports.view = (req,res) => {
     }
 	})
 }
+
+
+exports.modify = (req,res) => { 
+	const { name, img, idUser } = req.body
+
+	const sql = "update mydb_type.User set UserName = ?, UserImg = ? where idUser = ?"
+	conn.query(sql,[ name, img, idUser ],(err,row) => { 
+		if(err) throw err;
+
+		return res.send({
+			success: true,
+			code: 200,
+			msg:'수정되었습니다.'
+		})
+	})
+}

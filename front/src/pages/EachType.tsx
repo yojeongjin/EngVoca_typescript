@@ -5,8 +5,8 @@ import LeftSide from "../components/LeftSide";
 import EachTypeList from "../components/EachTypeList";
 import useUser from "../hooks/useUser";
 
-export default function EachType() {
-    const user = useUser()
+const EachType: React.FC = () => {
+  const user = useUser()
 
   if (user === null) {
     return <SigninContainer />
@@ -19,3 +19,5 @@ export default function EachType() {
 
   )
 }
+
+export default EachType

@@ -6,7 +6,7 @@ import DayContainer from "../containers/DayContainer";
 import useUser from "../hooks/useUser";
 
 
-export default function Home() {
+const Home: React.FC = () => {
   const user = useUser()
 
 
@@ -20,3 +20,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

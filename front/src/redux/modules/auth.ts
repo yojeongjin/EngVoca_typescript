@@ -1,9 +1,9 @@
 import { AnyAction } from 'redux';
 import { createActions, handleActions } from "redux-actions";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
-import { JoinReqType, LoginReqType, UserType } from "../../types";
+import { JoinReqType, LoginReqType, ModiReqType, UserType } from "../../types";
 
 export interface AuthState {
   user: UserType | null;
@@ -51,13 +51,14 @@ const reducer = handleActions<AuthState,any>(
 export default reducer
 
 //saga
-export const { login, logout, join } = createActions("LOGIN", "LOGOUT", "JOIN", {prefix})
+export const { login, logout, join, modi } = createActions("LOGIN", "LOGOUT", "JOIN","MODI", {prefix})
 
 
 export function* authSaga() {
   yield takeEvery(`${prefix}/LOGIN`, loginSaga)
   yield takeEvery(`${prefix}/LOGOUT`, logoutSaga)
   yield takeEvery(`${prefix}/JOIN`, joinSaga)
+  yield takeEvery(`${prefix}/MODI`, modiSaga)
 }
 
 interface LoginSagaAction extends AnyAction {
@@ -108,7 +109,6 @@ async function joinAPI(joinData: JoinReqType): Promise<string> {
 }
 
 function* joinSaga(action: JoinSagaAction) {
-  
   try{
     yield put(pending())
     const user: UserType = yield call(joinAPI, action.payload)
@@ -117,6 +117,32 @@ function* joinSaga(action: JoinSagaAction) {
     window.location.replace('/')
   } catch(error) {
     yield put(fail('UNKNOWN_ERROR'))
+    alert('오류가 발생하였습니다.')
+  }
+}
+
+interface ModiSagaAction extends AnyAction {
+  payload: ModiReqType;
+}
+
+async function modiAPI(modiData: ModiReqType): Promise<string> {
+  const res = await axios.patch('http://localhost:3001/api/signin', modiData)
+  
+  return res.data.msg
+}
+
+function* modiSaga(action: ModiSagaAction) {
+  const { name, img } = action.payload
+  try{
+    yield put(pending())
+    const msg: string = yield call(modiAPI, action.payload)
+    const user: UserType = yield select(state=>state.auth.user)
+    yield put(success({...user, UserName: name, UserImg: img}))
+    alert(msg)
+    window.location.reload()
+  } catch(error) {
+    yield put(fail('UNKNOWN_ERROR'))
+    console.log(error)
     alert('오류가 발생하였습니다.')
   }
 }

@@ -12,8 +12,7 @@ import save from "../assets/save.png"
 import saved from "../assets/saved.png"
 import useUser from "../hooks/useUser";
 
-
-export default function Test() {
+const Test: React.FC = () => {
   const params = useParams()
   const idx = params.idx
   const dispatch = useDispatch()
@@ -84,6 +83,8 @@ export default function Test() {
     </Main>
   )
 }
+
+export default Test
 
 const TestBase = styled.div`
 `

@@ -6,7 +6,7 @@ import { login as loginSagaStart } from '../redux/modules/auth';
 import { LoginReqType } from '../types';
 
 
-export default function SigninContainer() {
+const SigninContainer: React.FC = () => {
   const dispatch = useDispatch()
 
   const login = useCallback((req:LoginReqType)=> {
@@ -15,3 +15,5 @@ export default function SigninContainer() {
 
   return <Signin login={login}/>
 }
+
+export default SigninContainer

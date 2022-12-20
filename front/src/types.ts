@@ -15,6 +15,12 @@ export type JoinReqType = {
   img: string
 }
 
+export type ModiReqType = {
+  name: string,
+  img: string,
+  idUser: number
+}
+
 export type ActiveReqType = {
   Day: string
   active: string

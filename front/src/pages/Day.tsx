@@ -7,7 +7,7 @@ import LeftSide from "../components/LeftSide";
 import { DayWords } from "../types";
 import useUser from "../hooks/useUser";
 
-export default function Day() {
+const Day: React.FC = () => {
   const user = useUser()
   const params = useParams()
   const idx = params.idx
@@ -67,6 +67,8 @@ export default function Day() {
     </Main>
   )
 }
+
+export default Day
 
 const DayBase = styled.div`
 `
