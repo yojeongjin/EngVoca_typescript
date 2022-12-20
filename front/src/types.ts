@@ -1,5 +1,6 @@
 import { AuthState } from "./redux/modules/auth";
 import { SaveState } from "./redux/modules/save";
+import { TestState } from "./redux/modules/test";
 
 export type LoginReqType = {
   email: string
@@ -55,6 +56,11 @@ export type UserType = {
   UserImg: string
 }
 
+export type TestType = {
+  voca: string
+  meaning: string
+}
+
 export type wordList = {
   voca: string
   meaning: string
@@ -62,9 +68,11 @@ export type wordList = {
   idTest: number
 }
 
+
 export interface RootState {
   auth: AuthState
   save: SaveState
+  test: TestState
 }
 
 export interface DayType {

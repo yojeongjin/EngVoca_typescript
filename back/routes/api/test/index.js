@@ -4,7 +4,7 @@ const dao = require('./dao'); //데이터 모듈 호출
 router.get('/', dao.list);
 
 router.all('*',(req, res)=> {
-	res.status(404).send({success:false, msg:'eachtype unknown uri ${req.path}'});
+	res.status(404).send({success:false, msg:'test unknown uri ${req.path}'});
 })
 
 module.exports = router;

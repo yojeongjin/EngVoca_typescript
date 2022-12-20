@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import auth from "./auth"
 import save from "./save"
+import test from "./test"
 
 //redux-persist
 import { persistReducer } from "redux-persist";
@@ -13,7 +14,8 @@ const persistConfig = {
 
 const reducer = combineReducers({
   auth,
-  save
+  save,
+  test
 })
 
 export default persistReducer(persistConfig, reducer)

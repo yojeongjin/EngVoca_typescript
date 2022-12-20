@@ -3,19 +3,24 @@ import React, { useEffect, useState, useRef }  from 'react'
 import styled from 'styled-components'
 import { Main } from './Main'
 
-const RepeatTest: React.FC = () => {
+interface RepeatTestProps {
+  getVoca: string[] | null
+  getMeaning: string[] | null
+}
+
+const RepeatTest: React.FC<RepeatTestProps> = ({getVoca, getMeaning}) => {
   const [ answer, setAnswer ] = useState('')
+  const [ answerList, setAnswerList ] = useState([])
   const [ count, setCount ] = useState(3)
   const [ timer, setTimer ] = useState<number>(0)
   const [ countCheck , setCountCheck ] = useState<boolean>(false)
   const [ stage, setStage ] = useState(0)
-  const [ vocaList, setVocaList ] = useState('voca[0]')
+  const [ vocaList, setVocaList ] = useState(getVoca[0])
+  const [ testStart, setTestStart ] = useState(true)
+  const [ testEnd, setTestEnd ] = useState(false)
 
   const countId = useRef(null)
   const timerId = useRef(null)
-
-  const voca = ['somang', 'dangdong', 'dingdong']
-  const answerList = []
 
   useEffect(() => {
     countId.current = setInterval(() => {
@@ -27,6 +32,7 @@ const RepeatTest: React.FC = () => {
   useEffect(() => {
     if (count <= 0) {
       clearInterval(countId.current)
+      setTestStart(false)
       setCountCheck(true)
       setTimer(5)
     }
@@ -46,20 +52,43 @@ const RepeatTest: React.FC = () => {
     }
   },[timer])
 
+  console.log(answerList)
   const nextStage = () => {
-    answerList.push(answer)
-    setAnswer('')
+    setAnswerList([...answerList, answer])
     setTimer(5)
     setStage(stage + 1)
-    setVocaList(voca[stage])
+    setVocaList(getVoca[stage])
   }
+
+  useEffect(() => {
+    if(answerList.length === 11){
+      setCountCheck(false)
+      setTestEnd(true)
+    }
+  },[answerList])
+
+  const answerWord = 
+  getVoca.map((voca) => (
+    <WordItem>{voca}</WordItem>
+  ))
+
+  const answerMeaning = 
+  getMeaning.map((meaning) => (
+    <WordItem>{meaning}</WordItem>
+  ))
+
+  const myAnswer = 
+  answerList.map((answer) => (
+    <WordItem>{answer}</WordItem>
+  ))
+
 
   return (
     <Main>
       <RepeatTestBase>
         <Inner>
           {
-            countCheck !== true &&
+            testStart &&
             <div style={{flexDirection: "column", position: "relative"}}>
               <img style={{width: "100px", position: "absolute", top: "-50px", right: "5px"}}
               src={`${process.env.PUBLIC_URL}/assets/mortarboard.webp`} 
@@ -84,6 +113,31 @@ const RepeatTest: React.FC = () => {
               </QandASection>
             </RepeatContent>
           }
+          {
+            testEnd &&
+            <RepeatContent style={{width: "700px", height: "500px", flexDirection: "row"}}>
+              <SubTitle>💌 나의 답안지 💌</SubTitle>
+              <AnswerList>
+                <WordList>
+                  {answerWord}
+                </WordList>
+              </AnswerList>
+
+              <AnswerList>
+                <WordList>
+                  {answerMeaning}
+                </WordList>
+              </AnswerList>
+
+              <AnswerList style={{backgroundColor:"#fff"}}>
+                <AnserItem>
+                  <WordList>
+                    {myAnswer}
+                  </WordList>
+                </AnserItem>
+              </AnswerList>
+            </RepeatContent>
+          }
         </Inner>
       </RepeatTestBase>
     </Main>
@@ -95,6 +149,7 @@ const RepeatTest: React.FC = () => {
 export default RepeatTest
 
 const RepeatTestBase = styled.div`
+font-size: 13px;
 `
 
 const Inner = styled.div`
@@ -172,3 +227,41 @@ display: flex;
 justify-content: center;
 align-items: center;
 `
+
+const AnswerList = styled.div`
+flex: 1;
+height: 100%;
+background-color: #D4DFE6;
+`
+
+const WordList = styled.ul`
+position: relative;
+`
+
+const WordItem = styled.li`
+height: 50px;
+border-bottom: 1px solid #eee;
+display: flex;
+justify-content: center;
+align-items: center;
+`
+
+const AnserItem = styled.div`
+position: absolute;
+top: -50px;
+width: 33.5%;
+`
+
+const SubTitle = styled.div`
+position: absolute;
+width: 232px;
+height: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #fff;
+box-shadow : 6px 0px 6px -8px;
+top: -50px;
+right: 0;
+`
+
