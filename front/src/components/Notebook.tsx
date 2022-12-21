@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { wordList, DeleteType } from '../types';
 import { Main } from './Main';
+import { Desktop, Mobile } from '../hooks/useMediaQuery';
 
 interface NotebookProps {
   wordList: wordList[] | null
@@ -40,41 +41,86 @@ const Notebook: React.FC<NotebookProps> = ({wordList,deleteWord}) => {
 
   if (wordList?.length === 0) {
     return (
-      <Main>
-      <NotebookBase>
-        <Inner>
-          <NoteContent>
-            <Content style={{fontSize: "14px", color: "#4D94E6", marginTop: "100px", textAlign: "center"}}>
-              💌 아직 저장된 단어가 없어요!
-            </Content>
-          </NoteContent>
-        </Inner>
-      </NotebookBase>
-    </Main>
+      <>
+        <Desktop>
+          <Main>
+            <NotebookBase>
+              <Inner>
+                <NoteContent>
+                  <Content style={{color: "#4D94E6", marginTop: "100px", textAlign: "center"}}>
+                    💌 아직 저장된 단어가 없어요!
+                  </Content>
+                </NoteContent>
+              </Inner>
+            </NotebookBase>
+          </Main>
+        </Desktop>
+
+        {/* 모바일 */}
+        <Mobile>
+          <NotebookBase>
+            <Inner>
+              <NoteContent>
+                <Content style={{color: "#4D94E6", marginTop: "200px", textAlign: "center"}}>
+                  💌 아직 저장된 단어가 없어요!
+                </Content>
+              </NoteContent>
+            </Inner>
+          </NotebookBase>
+        </Mobile>
+      </>
+
     )
   } 
   return (
-    <Main>
-      <NotebookBase>
-        <Inner>
-          <NoteContent>
-            <NoteTitle>
-              <H1 style={{width: "45%"}}>VOCA</H1>
-              <H1>MEANING</H1>
-            </NoteTitle>
-            <Content>
-              {wordDetail}
-            </Content>
-          </NoteContent>
-        </Inner>
-      </NotebookBase>
-    </Main>
+    <>
+      <Desktop>
+        <Main>
+          <NotebookBase>
+            <Inner>
+              <NoteContent>
+                <NoteTitle>
+                  <H1 style={{width: "45%"}}>VOCA</H1>
+                  <H1 style={{width: "55%"}}>MEANING</H1>
+                </NoteTitle>
+                <Content>
+                  {wordDetail}
+                </Content>
+              </NoteContent>
+            </Inner>
+          </NotebookBase>
+        </Main>
+      </Desktop>
+
+      {/* 모바일 */}
+      <Mobile>
+        <NotebookBase>
+          <Inner>
+            <NoteContent>
+              <NoteTitle>
+                <H1 style={{width: "45%"}}>VOCA</H1>
+                <H1>MEANING</H1>
+              </NoteTitle>
+              <Content>
+                {wordDetail}
+              </Content>
+            </NoteContent>
+          </Inner>
+        </NotebookBase>
+      </Mobile>
+    </>
+
   )
 }
 
 export default Notebook
 
 const NotebookBase = styled.div`
+font-size: 14px;
+
+@media ${props => props.theme.mobile} {
+  font-size: 12px;
+}
 `
 
 const Inner = styled.div`
@@ -84,6 +130,10 @@ margin: 0 auto;
 display: flex;
 justify-content: center;
 align-items: center;
+
+@media ${props => props.theme.mobile} {
+  width: 370px;
+}
 `
 
 const NoteContent = styled.div`
@@ -94,15 +144,22 @@ border-radius: 12px;
 box-shadow : 5px 5px 8px -8px;
 padding: 0 20px 10px;
 overflow-y: scroll;
+
+@media ${props => props.theme.mobile} {
+  width: 90%;
+  height: 65%;
+}
 `
 
 const NoteTitle = styled.div`
-width: 520px;
-padding: 10px 0 0;
-position: fixed;
+width: 100%;
+padding: 20px 0 0;
 display: flex;
-background-color: #fff;
-z-index: 5;
+font-size: 16px;
+@media ${props => props.theme.mobile} {
+  margin-top: 10px;
+  font-size: 14px;
+}
 `
 
 const H1 = styled.h1`
@@ -111,7 +168,7 @@ padding: 0 5px;
 `
 const Content = styled.div`
 width: 100%;
-margin-top: 45px;
+margin-top: 20px;
 `
 
 const ContentWrap = styled.div`
@@ -132,7 +189,6 @@ padding: 0 5px;
 
 const WordList = styled.ul`
 width: 100%;
-font-size: 14px;
 display: flex;
 flex-wrap: wrap;
 `

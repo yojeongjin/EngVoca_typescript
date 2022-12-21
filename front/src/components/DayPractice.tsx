@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ActiveReqType } from '../types';
 import { Main } from './Main';
+import { Desktop,Mobile } from '../hooks/useMediaQuery';
 
 
 interface DayProps {
@@ -14,7 +15,7 @@ interface DayProps {
 const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
 
   const changeHandler = (Day: any) => {
-    const active = '학습 진행 중'
+    const active = '학습 진행 중💪🏻'
     changeActive({Day, active, idUser})
   }
   
@@ -22,7 +23,7 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
   dayData.map((day) => (
     <Link to={"/day/" + day[0]}>
       {
-        day[1] === '학습 완료' ?
+        day[1] === '학습 완료✨' ?
         <PracticeItem onClick={() => {changeHandler(day[0])}}
         style={{backgroundColor: "#eee", border: "1px solid #eee", color: "#333"}}>
           {day[0]}
@@ -38,17 +39,35 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
   ))
 
   return (
-    <Main>
-      <DayPracticeBase>
-        <Inner>
-          <DayContent>
-            <PracticeList>
-              {dayDetail}
-            </PracticeList>
-          </DayContent>
-        </Inner>
-      </DayPracticeBase>
-    </Main>
+    <>
+      <Desktop>
+        <Main>
+          <DayPracticeBase>
+            <Inner>
+              <DayContent>
+                <PracticeList>
+                  {dayDetail}
+                </PracticeList>
+              </DayContent>
+            </Inner>
+          </DayPracticeBase>
+        </Main>
+      </Desktop>
+
+      {/* 모바일 */}
+
+      <Mobile>
+        <DayPracticeBase>
+            <Inner>
+              <DayContent>
+                <PracticeList>
+                  {dayDetail}
+                </PracticeList>
+              </DayContent>
+            </Inner>
+          </DayPracticeBase>
+      </Mobile>
+    </>
   )
 }
 
@@ -65,6 +84,10 @@ margin: 0 auto;
 display: flex;
 justify-content: center;
 align-items: center;
+
+@media ${props => props.theme.mobile} {
+  width: 370px;
+}
 `
 
 const DayContent = styled.div`
@@ -75,6 +98,11 @@ border-radius: 12px;
 box-shadow : 5px 5px 8px -8px;
 padding: 0 10px 20px;
 overflow-y: scroll;
+
+@media ${props => props.theme.mobile} {
+  width: 100%;
+  height: 65%;
+}
 `
 const PracticeList = styled.ul`
 width: 100%;
@@ -89,7 +117,7 @@ align-items: center;
 const Active = styled.span`
 font-size: 11px;
 display: block;
-color: #4D94E6;
+color: ${(props) => props.theme.mainColor};
 `
 
 const PracticeItem = styled.li`
@@ -105,7 +133,7 @@ align-items: center;
 flex-direction: column;
 
 &:hover {
-  background-color: #4D94E6;
+  background-color: ${(props) => props.theme.mainColor};
   color: #fff;
   ${Active} {
     color: #fff;

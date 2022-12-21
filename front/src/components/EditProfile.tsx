@@ -23,7 +23,8 @@ const EditProfile: React.FC<EditProfileProps> = ({user, editContent}) => {
     'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/antelope.webp',
     'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/monkey.webp',
     'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/polar-bear.webp',
-    'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/kangaroo.webp'
+    'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/kangaroo.webp',
+    'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/penguin.png'
   ]
 
   const refresh = useCallback(() => {
@@ -80,6 +81,11 @@ border-radius: 20px;
 margin: 30px auto 0;
 background-color: #fff;
 font-size: 14px;
+
+
+@media ${props => props.theme.mobile} {
+  width: 370px;
+}
 `
 
 const EditImg = styled.div`

@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
 import { LoginReqType } from '../types';
 
 interface SigninProps {
@@ -19,19 +18,15 @@ const Signin: React.FC<SigninProps> = ({login}) => {
     login({email, password})
   }
 
+  const handleOnKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      signinHandler()
+    }
+  }
 
   return (
     <SigninBase>
       <Inner>
-        <SigninNav>
-          <SigninTitle>
-            <img 
-            src={`${process.env.PUBLIC_URL}/assets/vocalogo.webp`} alt='로고' 
-            style={{width:"50%", height: "50%"}}
-            />
-          </SigninTitle>
-        </SigninNav>
-
         <SigninContent>
           <SigninTitle style={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
             <img 
@@ -56,6 +51,7 @@ const Signin: React.FC<SigninProps> = ({login}) => {
             id="pwInput"
             placeholder="비밀번호를 입력해주세요."
             ref={pwRef}
+            onKeyPress={handleOnKeyPress}
             />
           </InputWrap>
 
@@ -81,19 +77,15 @@ const SigninBase = styled.div`
 
 const Inner = styled.div `
 width: 1300px;
+height: 100vh;
 margin: 0 auto;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-`
-
-const SigninNav = styled.header`
-width: 1200px;
-margin: 0 auto;
-display: flex;
-justify-content: space-between;
-align-items: center;
+@media ${props => props.theme.mobile} {
+  width: 370px;
+}
 `
 
 const SigninContent = styled.div`
@@ -154,6 +146,6 @@ padding: 15px 0;
 margin-top: 15px;
 font-size: 14px;
 border-radius: 8px;
-background-color: #4D94E6;
+background-color: ${(props) => props.theme.mainColor};
 color: #fff;
 `

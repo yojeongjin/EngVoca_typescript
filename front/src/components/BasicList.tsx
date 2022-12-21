@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { Main } from './Main';
 import { EachWords } from '../types';
+import { Desktop, Mobile } from '../hooks/useMediaQuery';
 
 const BasicList: React.FC = () => {
   const location = useLocation()
@@ -71,22 +72,44 @@ const BasicList: React.FC = () => {
   ))
 
   return (
-    <Main>
-      <BasicBase>
-        <Inner>
-          <ChapterTitle>
-            <ChapterList>
-              {chapterDetail}
-            </ChapterList>
-          </ChapterTitle>
+    <>
+      <Desktop>
+        <Main>
+          <BasicBase>
+            <Inner>
+              <ChapterTitle>
+                <ChapterList>
+                  {chapterDetail}
+                </ChapterList>
+              </ChapterTitle>
 
-          <WordContent>
-            {eachDetail}
-          </WordContent>
+              <WordContent>
+                {eachDetail}
+              </WordContent>
 
-        </Inner>
-      </BasicBase>
-    </Main>
+            </Inner>
+          </BasicBase>
+        </Main>
+      </Desktop>
+
+      {/** 모바일 */}
+      <Mobile>
+        <BasicBase>
+          <Inner>
+            <ChapterTitle>
+              <ChapterList>
+                {chapterDetail}
+              </ChapterList>
+            </ChapterTitle>
+
+            <WordContent>
+              {eachDetail}
+            </WordContent>
+
+          </Inner>
+        </BasicBase>
+      </Mobile>
+    </>
   )
 }
 
@@ -101,15 +124,26 @@ const Inner = styled.div`
 width: 750px;
 height: 100vh;
 margin: 0 auto;
+
+@media ${props => props.theme.mobile} {
+  width: 370px;
+}
 `
 
 const ChapterTitle = styled.div`
 height: 10%;
+
+@media ${props => props.theme.mobile} {
+  width: 90%;
+  overflow-x: scroll;
+  margin: 40px 0 20px;
+}
 `
 
 const ChapterList = styled.ul`
 margin-top: 20px;
 display: flex;
+
 `
 
 const ChapterItem = styled.li<{isChpater:boolean}>`
@@ -119,7 +153,11 @@ padding: 15px 15px;
 background-color: ${(props) => props.isChpater ? '#4D94E6' : '#fff'};
 color: ${(props) => props.isChpater ? '#fff' : '#252525'};
 &:first-child {
-  margin: 0 0;
+  margin: 0 20px 0 0;
+}
+
+@media ${props => props.theme.mobile} {
+  margin: 0 17px;
 }
 `
 
@@ -127,6 +165,12 @@ const WordContent = styled.div`
 height: 79.9%;
 background-color: #fff;
 box-shadow : 5px 5px 8px -8px;
+
+@media ${props => props.theme.mobile} {
+  width: 90%;
+  height: 65%;
+  overflow-y: scroll;
+}
 `
 
 const WordsList = styled.ul`
@@ -149,5 +193,4 @@ align-items: center;
 `
 
 const ChapterBtn = styled.button`
-
 `

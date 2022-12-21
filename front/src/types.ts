@@ -1,4 +1,5 @@
 import { AuthState } from "./redux/modules/auth";
+import { DayState } from "./redux/modules/day";
 import { SaveState } from "./redux/modules/save";
 import { TestState } from "./redux/modules/test";
 
@@ -16,8 +17,14 @@ export type JoinReqType = {
 }
 
 export type ModiReqType = {
-  name: string,
-  img: string,
+  name: string
+  img: string
+  idUser: number
+}
+
+export type UpdateReqType = {
+  Day: string
+  active: string
   idUser: number
 }
 
@@ -41,11 +48,8 @@ export type GetWordType = {
   idUser: number
 }
 
-export type DayWords = {
-  words: string
-  meaning: string
-  idVocabulary: number
-  isSave: boolean
+export type GetDayType = {
+  idx: string
 }
 
 export type EachWords = {
@@ -75,10 +79,19 @@ export type wordList = {
   idTest: number
 }
 
+export type DayType = {
+  DayCheck: string
+  words: string
+  meaning: string
+  idVocabulary: number
+  isSave: boolean
+}
+
 
 export interface RootState {
   auth: AuthState
   save: SaveState
   test: TestState
+  day: DayState
 }
 

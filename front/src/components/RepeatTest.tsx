@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef }  from 'react'
 import styled from 'styled-components'
 import { TestType } from '../types'
 import { Main } from './Main'
+import { Desktop, Mobile } from '../hooks/useMediaQuery'
 
 interface RepeatTestProps {
   test: TestType[] | null
@@ -187,7 +188,7 @@ width: 135px;
 height: 135px;
 font-size: 45px;
 font-weight: bold;
-color: #4D94E6;
+color: ${(props) => props.theme.mainColor};
 border-radius: 50%;
 background-color: #fff;
 display: flex;
@@ -219,7 +220,7 @@ margin: 40px 0;
 const QuestionSection = styled.div`
 width: 100%;
 height: 100%;
-background-color: #4D94E6;
+background-color: ${(props) => props.theme.mainColor};
 display: flex;
 justify-content: center;
 align-items: center;

@@ -31,7 +31,8 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
     'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/antelope.webp',
     'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/monkey.webp',
     'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/polar-bear.webp',
-    'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/kangaroo.webp'
+    'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/kangaroo.webp',
+    'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/penguin.png'
   ]
 
   const changeHandler = useCallback(
@@ -61,7 +62,24 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
       alert('이메일 중복확인을 해주세요.')
     }
 
+    if (emailRef.current!.value === '') {
+      return alert('이메일을 입력해주세요')
+    } else if (pw === '') {
+      return alert('비밀번호를 입력해주세요') 
+    } else if (rePw === '') {
+      return alert('비밀번호를 확인해주세요') 
+    } else if (nameRef.current!.value === '') {
+      return alert('닉네임을 입력해주세요.')
+    }
+
+    
     join({email, password, repassword, name, img})
+  }
+
+  const handleOnKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      joinHandler()
+    }
   }
 
   const checkHandler = async () => {
@@ -87,17 +105,6 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
   return (
     <JoinBase>
       <Inner>
-        <JoinNav>
-          <Link to="/">
-            <JoinTitle>
-              <img 
-              src={`${process.env.PUBLIC_URL}/assets/vocalogo.webp`} alt='로고' 
-              style={{width:"50%", height: "50%"}}
-              />
-            </JoinTitle>
-          </Link>
-        </JoinNav>
-
         <JoinContent>
           <JoinTitle style={{display:"flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
             <img 
@@ -157,6 +164,7 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
             id="nameInput"
             placeholder="닉네임을 입력해주세요."
             ref={nameRef}
+            onKeyPress={handleOnKeyPress}
             />
           </InputWrap>
 
@@ -176,18 +184,16 @@ const JoinBase = styled.div`
 `
 const Inner = styled.div`
 width: 1300px;
+height: 100vh;
 margin: 0 auto;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-`
 
-const JoinNav = styled.header`
-width: 1200px;
-margin: 0 auto;
-display: flex;
-align-items: center;
+@media ${props => props.theme.mobile} {
+  width: 370px;
+}
 `
 
 const JoinTitle = styled.div`
@@ -199,6 +205,10 @@ background-color: #fff;
 width: 400px;
 border-radius: 12px;
 box-shadow : 5px 5px 10px -5px;
+
+@media ${props => props.theme.mobile} {
+  width: 90%;
+}
 `
 
 const InputWrap = styled.div`
@@ -206,6 +216,9 @@ padding: 0 50px;
 display: flex;
 justify-content: flex-start;
 flex-direction: column;
+@media ${props => props.theme.mobile} {
+  padding: 0 15px;
+}
 `
 
 const Input = styled.input`
@@ -240,7 +253,7 @@ width: 300px;
 padding: 15px 0;
 font-size: 14px;
 border-radius: 8px;
-background-color: #4D94E6;
+background-color: ${(props) => props.theme.mainColor};
 color: #fff;
 `
 
