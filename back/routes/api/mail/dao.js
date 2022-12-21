@@ -3,8 +3,8 @@ require('dotenv').config()
 
 
 exports.send = (req,res) => {
-  const { userEmail}  = req.body
-
+  const { userEmail }   = req.body
+  console.log(userEmail)
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     prot: 587,

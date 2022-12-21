@@ -1,16 +1,15 @@
-import React, { Dispatch,SetStateAction }  from "react";
+import React, { Dispatch,SetStateAction, ReactNode }  from "react";
 import styled from "styled-components";
 
-import ProfileContainer from "../containers/ProfileContainer";
-
 interface ModalProps {
-  setOpenProfile: Dispatch<SetStateAction<boolean>>
+  setOpenModal: Dispatch<SetStateAction<boolean>>
+  children: ReactNode
 }
 
-const ModalProfile: React.FC<ModalProps> = ({setOpenProfile}) => {
+const Modal: React.FC<ModalProps> = ({children, setOpenModal}) => {
 
   const closeModal = () => {
-    setOpenProfile(false) 
+    setOpenModal(false) 
   }
 
   return (
@@ -18,12 +17,12 @@ const ModalProfile: React.FC<ModalProps> = ({setOpenProfile}) => {
       <ModalTitle>
         <CloseBtn onClick={closeModal}> X </CloseBtn>
       </ModalTitle>
-      <ProfileContainer />
+      {children}
     </ModalBase>
   )
 }
 
-export default ModalProfile
+export default Modal
 
 
 const ModalBase = styled.div`

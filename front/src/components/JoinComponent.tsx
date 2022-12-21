@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import { JoinReqType } from '../types'
 import axios from 'axios'
 import { useCallback } from 'react'
+import Modal from './Modal'
+import JoinAuth from './JoinAuth'
 
 interface JoinProps {
   join: (reqData: JoinReqType) => void
@@ -14,11 +16,13 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
   const emailRef = useRef<HTMLInputElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
 
-  const [ isCheck, setIsCheck ] = useState(false)
-  const [ isCheckPw, setIsCheckPw ] = useState(false)
-  const [ pw, setPw ] = useState('')
-  const [ rePw, setRepw ] = useState('')
-  const [ checkPw, setCheckPw ] = useState('')
+  const [ isCheck, setIsCheck ] = useState<boolean>(false)
+  const [ isCheckPw, setIsCheckPw ] = useState<boolean>(false)
+  const [ pw, setPw ] = useState<string>('')
+  const [ rePw, setRepw ] = useState<string>('')
+  const [ checkPw, setCheckPw ] = useState<string>('')
+  const [ openModal, setOpenModal ] = useState<boolean>(false)
+  const [ emailAuth, setEmailAuth ] = useState<string>('')
 
   const profileImg = [
     'https://ssalgu-bucket.s3.ap-northeast-2.amazonaws.com/hare.webp',
@@ -83,6 +87,9 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
 
   const checkHandler = async () => {
     const email = emailRef.current!.value
+    if(email === '') {
+      return alert('이메일을 입력해주세요.')
+    }
     try {
       const res = await axios.post(
         'http://localhost:3001/api/mail', {
@@ -92,9 +99,10 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
           alert('오류가 발생하였습니다. 다시 한번 시도해주세요.')
           window.location.reload()
         } else {
-          console.log(res.data)
+          setEmailAuth(res.data.authcode)
           alert(res.data.msg)
           setIsCheck(true)
+          setOpenModal(true)
         }
     } catch (err) {
       console.log(err)
@@ -155,7 +163,7 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
             required
             onChange={(e) => {changeHandler(e)}}
             />
-            <PwCheck isCheckPw={isCheckPw === true}>
+            <PwCheck isCheckPw={isCheckPw}>
               {checkPw}
             </PwCheck>
           </InputWrap>
@@ -177,6 +185,11 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
           </BtnWrap>
         </JoinContent>
       </Inner>
+      {openModal && (
+        <Modal setOpenModal={setOpenModal}>
+          <JoinAuth emailAuth={emailAuth} setOpenModal={setOpenModal} />
+        </Modal>
+      )}
     </JoinBase>
   )
 }
