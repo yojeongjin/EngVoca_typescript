@@ -67,7 +67,6 @@ function* getTestWordSaga() {
   try{
     yield put(pending())
     const test: TestType = yield call(getTestWordAPI)
-
     yield put(success(test))
   } catch(error) {
     yield put(fail('UNKNOWN_ERROR'))

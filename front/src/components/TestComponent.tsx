@@ -32,8 +32,9 @@ const TestComponent: React.FC<TestProps> = ({user, saveWord, words}) => {
   }
 
   const wordsDetail =
-  words.map((word, idx) => (
-    <ContentWrap key={word.idVocabulary}>
+  words.map((word, idx) => {
+    return (
+      <ContentWrap key={word.idVocabulary}>
         <TestList>
           <TestItem1>{word.words}</TestItem1>
           <TestItem2>{word.meaning}</TestItem2>
@@ -44,12 +45,14 @@ const TestComponent: React.FC<TestProps> = ({user, saveWord, words}) => {
         <SaveContent onClick={()=>handleClick(idx)} >
           <SaveIcon isSave={word.isSave === true}></SaveIcon>
         </SaveContent>
-    </ContentWrap>
-  ))
+      </ContentWrap>
+    )
+  })
 
   const mobileDetail =
-  words.map((word, idx) => (
-    <ContentWrap key={word.idVocabulary}>
+  words.map((word, idx) => {
+    return (
+      <ContentWrap key={word.idVocabulary}>
         <TestList>
           <TestItem1>{word.words}</TestItem1>
           <TestItem2>{word.meaning}</TestItem2>
@@ -57,8 +60,9 @@ const TestComponent: React.FC<TestProps> = ({user, saveWord, words}) => {
         <SaveContent onClick={()=>handleClick(idx)} >
           <SaveIcon isSave={word.isSave === true}></SaveIcon>
         </SaveContent>
-    </ContentWrap>
-  ))
+      </ContentWrap>
+    )
+  })
 
   return (
     <>
@@ -123,7 +127,8 @@ padding: 0 10px 20px;
 
 @media ${props => props.theme.mobile} {
   width: 90%;
-  height: 87%;
+  height: 85%;
+  overflow-y: scroll;
 }
 `
 
@@ -221,6 +226,5 @@ background-image: ${(props) => props.isSave ? `url(${saved})` : `url(${save})`};
   width: 20px;
   height: 20px;
   background-size: cover;
-  padding: 3px 0 0;
 }
 `

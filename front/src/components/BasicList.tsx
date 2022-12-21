@@ -55,22 +55,24 @@ const BasicList: React.FC = () => {
 
 
   const eachDetail =
-  eachWords.map((voca) => (
+  eachWords.map((voca) => {
+    return(
     <WordsList key={voca.idAllVoca}>
       <WordsItem style={{backgroundColor: "#D4DFE6"}}>{voca.voca}</WordsItem>
       <WordsItem>{voca.meaning}</WordsItem>
     </WordsList>
-  ))
+    )
+  })
 
   const chapterDetail =
-  chapters.map((chapter,idx) => (
-    <>
+  chapters.map((chapter,idx) => {
+    return (
       <ChapterItem key={idx} isChpater={chapter === chapIdx} >
         <ChapterBtn onClick={clickHandler} name={chapter}>{chapter}</ChapterBtn>
       </ChapterItem>
-    </>
-  ))
-
+    )
+  })
+  
   return (
     <>
       <Desktop>

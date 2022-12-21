@@ -1,18 +1,19 @@
 import React from "react"
 import styled from "styled-components"
-import { UpdateReqType, UserType, DayType } from "../types"
+import { UpdateReqType, UserType, DayType, RootState } from "../types"
 import { Main } from "./Main"
 import { Link } from "react-router-dom"
 import { Desktop, Mobile } from "../hooks/useMediaQuery"
+import { useSelector } from "react-redux"
 
 interface DayDetailProps {
   user: UserType,
   modiActive: (updateData: UpdateReqType) =>  void
-  words: DayType[]
   idx: string
 }
 
-const DayDetail: React.FC<DayDetailProps> = ({user, modiActive, words, idx}) => {
+const DayDetail: React.FC<DayDetailProps> = ({user, modiActive, idx}) => {
+  const words = useSelector<RootState, DayType[] | null>((state) => state.day.day)
   const changeActive = () => {
     let Day = idx
     let active = '학습 완료✨'
@@ -22,12 +23,13 @@ const DayDetail: React.FC<DayDetailProps> = ({user, modiActive, words, idx}) => 
   }
 
   const wordsDetail =
-  words.map((words) => (
-    <WordsList key={words.idVocabulary}>
-      <WordsItem>{words.words}</WordsItem>
-      <WordsItem style={{fontSize: "12px"}}>{words.meaning}</WordsItem>
-    </WordsList>
-  ))
+  words.map((words) => {
+    return (
+      <WordsList key={words.idVocabulary}>
+        <WordsItem>{words.words}</WordsItem>
+        <WordsItem style={{fontSize: "12px"}}>{words.meaning}</WordsItem>
+      </WordsList>)
+  })
 
   return(
     <>

@@ -18,10 +18,10 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
     const active = '학습 진행 중💪🏻'
     changeActive({Day, active, idUser})
   }
-  
+
   const dayDetail =
-  dayData.map((day) => (
-    <Link to={"/day/" + day[0]}>
+  dayData.map((day) => {
+    return <Link to={"/day/" + day[0]} key={day[0]}>
       {
         day[1] === '학습 완료✨' ?
         <PracticeItem onClick={() => {changeHandler(day[0])}}
@@ -36,7 +36,7 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
         </PracticeItem>
       }
     </Link>
-  ))
+  })
 
   return (
     <>

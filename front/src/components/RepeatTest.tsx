@@ -1,16 +1,12 @@
 import React, { useEffect, useState, useRef }  from 'react'
-
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { TestType } from '../types'
+import { TestType, RootState } from '../types'
 import { Main } from './Main'
-import { Desktop, Mobile } from '../hooks/useMediaQuery'
 
-interface RepeatTestProps {
-  test: TestType[] | null
-}
-
-const RepeatTest: React.FC<RepeatTestProps> = ({test}) => {
-  const [ answer, setAnswer ] = useState('')
+const RepeatTest: React.FC = () => {
+  const test = useSelector<RootState, TestType[] | null>((state) => state.test.test)
+  const [ answer, setAnswer ] = useState<string>('')
   const [ answerList, setAnswerList ] = useState([])
   const [ count, setCount ] = useState(3)
   const [ timer, setTimer ] = useState<number>(0)
@@ -20,9 +16,14 @@ const RepeatTest: React.FC<RepeatTestProps> = ({test}) => {
   const [ testStart, setTestStart ] = useState<boolean>(true)
   const [ testEnd, setTestEnd ] = useState<boolean>(false)
 
-  const getVoca = test.map((test)=>test.voca)
-  const getMeaning = test.map((test)=>test.meaning)
+  const getVoca = test.map((test) => {
+    return test.voca
+  })
 
+  const getMeaning = test.map((test) => {
+    return test.meaning
+  })
+  
   const countId = useRef(null)
   const timerId = useRef(null)
 
@@ -84,19 +85,19 @@ const RepeatTest: React.FC<RepeatTestProps> = ({test}) => {
   }
 
   const answerWord = 
-  getVoca.map((voca) => (
-    <WordItem>{voca}</WordItem>
-  ))
+  getVoca.map((voca) => {
+    return <WordItem>{voca}</WordItem>
+  })
 
   const answerMeaning = 
-  getMeaning.map((meaning) => (
-    <WordItem>{meaning}</WordItem>
-  ))
+  getMeaning.map((meaning) => {
+    return <WordItem>{meaning}</WordItem>
+  })
 
   const myAnswer = 
-  answerList.map((answer) => (
-    <WordItem>{answer}</WordItem>
-  ))
+  answerList.map((answer) => {
+    return <WordItem>{answer}</WordItem>
+  })
 
   return (
     <Main>

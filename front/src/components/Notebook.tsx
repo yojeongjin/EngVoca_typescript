@@ -17,28 +17,31 @@ const Notebook: React.FC<NotebookProps> = ({wordList,deleteWord}) => {
   }
 
   const wordDetail = 
-  wordList?.map((word) => (
-    <ContentWrap key={word.idTest}>
-      <VocaWrap>
-        <WordList>
-          <WordItem>{word.voca}</WordItem>
-        </WordList>
-      </VocaWrap>
-      <MeanWrap>
-        <WordList>
-          <WordItem>{word.meaning}</WordItem>
-        </WordList>
-      </MeanWrap>
-      <DeleteContent>
-        <Delete 
-        src={`${process.env.PUBLIC_URL}/assets/delete.png`} 
-        alt='삭제아이콘' 
-        onClick={()=>{clickDelete(word.idTest)}}
-        />
-      </DeleteContent>
-    </ContentWrap>
-  ))
+  wordList?.map((word) => {
+    return (
+      <ContentWrap key={word.idTest}>
+        <VocaWrap>
+          <WordList>
+            <WordItem>{word.voca}</WordItem>
+          </WordList>
+        </VocaWrap>
+        <MeanWrap>
+          <WordList>
+            <WordItem>{word.meaning}</WordItem>
+          </WordList>
+        </MeanWrap>
+        <DeleteContent>
+          <Delete 
+          src={`${process.env.PUBLIC_URL}/assets/delete.png`} 
+          alt='삭제아이콘' 
+          onClick={()=>{clickDelete(word.idTest)}}
+          />
+        </DeleteContent>
+      </ContentWrap>
+    )
+  })
 
+  
   if (wordList?.length === 0) {
     return (
       <>

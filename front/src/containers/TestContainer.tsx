@@ -10,7 +10,7 @@ const TestContainer: React.FC = () => {
   const user = useUser()
   const dispatch = useDispatch()
   const words = useSelector<RootState, DayType[] | null>((state) => state.day.day)
-
+  
   const saveWord = useCallback((saveData: SaveReqType) => {
     dispatch(saving(saveData))
   }, [dispatch])

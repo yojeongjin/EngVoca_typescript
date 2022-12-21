@@ -87,7 +87,6 @@ export type DayType = {
   isSave: boolean
 }
 
-
 export interface RootState {
   auth: AuthState
   save: SaveState
