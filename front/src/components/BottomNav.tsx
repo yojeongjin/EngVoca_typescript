@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import ModalProfile from './ModalProfile';
+import Modal from './Modal';
 
 const BottomNav: React.FC = () => {
   const [ openProfile, setOpenProfile ] = useState<boolean>(false)
@@ -58,7 +58,7 @@ const BottomNav: React.FC = () => {
           </Link>
         </BottomNavLink>
       </BottomNavList>
-      {openProfile && <ModalProfile setOpenProfile={setOpenProfile} />}
+      {openProfile && <Modal setOpenProfile={setOpenProfile} />}
     </BottomBase>
   )
 }

@@ -41,7 +41,7 @@ const Notebook: React.FC<NotebookProps> = ({wordList,deleteWord}) => {
     )
   })
 
-  
+
   if (wordList?.length === 0) {
     return (
       <>
@@ -149,7 +149,7 @@ padding: 0 20px 10px;
 overflow-y: scroll;
 
 @media ${props => props.theme.mobile} {
-  width: 90%;
+  width: 93%;
   height: 65%;
 }
 `

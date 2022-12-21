@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
 import { useRef } from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { JoinReqType } from '../types'
 import axios from 'axios'
@@ -59,7 +58,7 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
     const img = profileImg[pick]
 
     if(isCheck === false) {
-      alert('이메일 중복확인을 해주세요.')
+      alert('이메일 인증을 해주세요.')
     }
 
     if (emailRef.current!.value === '') {
@@ -85,13 +84,15 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
   const checkHandler = async () => {
     const email = emailRef.current!.value
     try {
-      const res = await axios.get(
-        'http://localhost:3001/api/join', {params: { 
-          email: email }
+      const res = await axios.post(
+        'http://localhost:3001/api/mail', {
+          userEmail: email
         })
         if(res.data.code === 400) {
-          alert(res.data.msg)
+          alert('오류가 발생하였습니다. 다시 한번 시도해주세요.')
+          window.location.reload()
         } else {
+          console.log(res.data)
           alert(res.data.msg)
           setIsCheck(true)
         }
@@ -99,7 +100,6 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
       console.log(err)
     }
   }
-
 
 
   return (
@@ -119,17 +119,18 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
             type="email"
             id="emailInput"
             placeholder="이메일을 입력해주세요."
+            required
             ref={emailRef}
             />
 
             {
               isCheck ? 
               <ContentWrap isCheck={isCheck === true} disabled>
-                이메일 중복확인
+                이메일 인증하기
               </ContentWrap>
               :
               <ContentWrap onClick={checkHandler} isCheck={isCheck === true}>
-                이메일 중복확인
+                이메일 인증하기
               </ContentWrap>
             }
           </InputWrap>
@@ -140,6 +141,7 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
             type="password"
             id="emailInput"
             placeholder="비밀번호를 입력해주세요."
+            required
             onChange={(e) => {setPw(e.target.value)}}
             />
           </InputWrap>
@@ -150,6 +152,7 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
             type="password"
             id="emailInput"
             placeholder="비밀번호를 입력해주세요."
+            required
             onChange={(e) => {changeHandler(e)}}
             />
             <PwCheck isCheckPw={isCheckPw === true}>
@@ -163,6 +166,7 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
             type="text"
             id="nameInput"
             placeholder="닉네임을 입력해주세요."
+            required
             ref={nameRef}
             onKeyPress={handleOnKeyPress}
             />

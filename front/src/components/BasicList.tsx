@@ -136,7 +136,7 @@ const ChapterTitle = styled.div`
 height: 10%;
 
 @media ${props => props.theme.mobile} {
-  width: 90%;
+  width: 100%;
   overflow-x: scroll;
   margin: 40px 0 20px;
 }
@@ -169,7 +169,7 @@ background-color: #fff;
 box-shadow : 5px 5px 8px -8px;
 
 @media ${props => props.theme.mobile} {
-  width: 90%;
+  width: 95%;
   height: 65%;
   overflow-y: scroll;
 }

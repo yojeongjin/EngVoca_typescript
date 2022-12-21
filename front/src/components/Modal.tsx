@@ -36,7 +36,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-z-index: 99;
+z-index: 999;
 background-color: rgba(0, 0, 0, 0.6);
 `
 

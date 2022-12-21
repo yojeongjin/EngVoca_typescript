@@ -6,7 +6,9 @@ const save = require('./save')
 const eachtype = require('./eachtype')
 const join = require('./join')
 const test = require('./test')
+const mail = require('./mail')
 
+router.use("/mail", mail)
 router.use("/signin", signin);
 router.use("/day", day);
 router.use("/words", words);
