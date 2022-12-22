@@ -1,11 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 
+
 const GlobalStyles = createGlobalStyle`
   ${reset}
 
   * {
-  font-family: inherit;
   font-weight: inherit;
   color: inherit;
   -webkit-box-sizing: border-box;
@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-family: 'Noto Sans KR', sans-serif;
   }
   
   body {

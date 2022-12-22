@@ -106,7 +106,7 @@ export default EachTypeList
 
 const EachTypeBase = styled.div`
 font-size: 14px;
-font-weight: bold;
+font-weight: 500;
 color: #34314c;
 `
 

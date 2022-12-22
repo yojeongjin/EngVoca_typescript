@@ -74,7 +74,8 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
 export default DayPractice
 
 const DayPracticeBase = styled.div`
-
+font-size: 14px;
+color: #252525;
 `
 
 const Inner = styled.div`
@@ -106,7 +107,6 @@ overflow-y: scroll;
 `
 const PracticeList = styled.ul`
 width: 100%;
-font-size: 14px;
 display: flex;
 flex-wrap: wrap;
 display: flex;

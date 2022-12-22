@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import ProfileContainer from '../containers/ProfileContainer';
 import Modal from './Modal';
 
+
+
 const BottomNav: React.FC = () => {
   const [ openModal, setOpenModal ] = useState<boolean>(false)
+  const location = useLocation()
 
   const showModal = () => {
     setOpenModal(true)
   }
+
   return (
     <BottomBase>
       <BottomNavList>
 
-        <BottomNavLink>
+        <BottomNavLink isActive={location.pathname === '/'}>
           <Link to="/">
             <img 
             style={{marginTop: "10px"}}
@@ -23,14 +27,16 @@ const BottomNav: React.FC = () => {
           </Link>
         </BottomNavLink>
 
-        <BottomNavLink onClick={showModal}>
-          <img 
-          style={{marginTop: "10px"}}
-          src={`${process.env.PUBLIC_URL}/assets/profileicon.png`} 
-          alt='아이콘' />
+        <BottomNavLink isActive={openModal}>
+          <ImgWrap onClick={showModal}>
+            <img 
+            style={{marginTop: "10px"}}
+            src={`${process.env.PUBLIC_URL}/assets/profileicon.png`} 
+            alt='아이콘' />
+          </ImgWrap>
         </BottomNavLink>
 
-        <BottomNavLink>
+        <BottomNavLink isActive={location.pathname === '/eachtype'}>
           <Link to="/eachtype">
             <img 
             style={{marginTop: "10px"}}
@@ -39,7 +45,7 @@ const BottomNav: React.FC = () => {
           </Link>
         </BottomNavLink>
 
-        <BottomNavLink>
+        <BottomNavLink isActive={location.pathname === '/repeat'}>
           <Link to="/repeat">
             <img 
             style={{marginTop: "10px"}}
@@ -49,7 +55,7 @@ const BottomNav: React.FC = () => {
           </Link>
         </BottomNavLink>
 
-        <BottomNavLink>
+        <BottomNavLink isActive={location.pathname === '/notebook'}>
           <Link to="/notebook">
             <img 
             style={{marginTop: "10px"}}
@@ -87,10 +93,19 @@ width: 360px;
 border-top: 1px solid #ddd;
 `
 
-const BottomNavLink = styled.div`
+const BottomNavLink = styled.div<{isActive: boolean}>`
 float: left;
 width: 20%;
 text-align: center;
 height: 45px;
 line-height: 45px;
+box-shadow: 0px 10px 5px -5px gray;
+transform: translate(${(props) =>  props.isActive ? '0, -20%' : '0, 0'});
+&:hover {
+  scale: 1.2;
+}
+`
+
+const ImgWrap = styled.div`
+cursor: pointer;
 `

@@ -102,6 +102,8 @@ const TestComponent: React.FC<TestProps> = ({user, saveWord, words}) => {
 export default TestComponent
 
 const TestBase = styled.div`
+font-size: 14px;
+color: #333;
 `
 
 const Inner = styled.div`
@@ -197,7 +199,6 @@ backface-visibility: hidden;
 const TestList = styled.div`
 flex: 1;
 height: 60px;
-font-size: 14px;
 display: flex;
 justify-content: center;
 align-items: center;

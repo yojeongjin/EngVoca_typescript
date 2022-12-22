@@ -120,6 +120,8 @@ export default Notebook
 
 const NotebookBase = styled.div`
 font-size: 14px;
+color: #252525;
+font-weight: 300;
 
 @media ${props => props.theme.mobile} {
   font-size: 12px;
@@ -159,6 +161,7 @@ width: 100%;
 padding: 20px 0 0;
 display: flex;
 font-size: 16px;
+font-weight: 500;
 @media ${props => props.theme.mobile} {
   margin-top: 10px;
   font-size: 14px;

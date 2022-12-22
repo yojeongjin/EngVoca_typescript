@@ -69,7 +69,8 @@ const DayDetail: React.FC<DayDetailProps> = ({user, modiActive, idx, words}) => 
 export default DayDetail
 
 const DayDetailBase = styled.div`
-
+font-size: 14px;
+color:#252525;
 `
 
 const Inner = styled.div`
@@ -102,7 +103,6 @@ padding: 0 10px 20px;
 
 const WordsList = styled.ul`
 width: 100%;
-font-size: 14px;
 display: flex;
 flex-wrap: wrap;
 

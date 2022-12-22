@@ -22,8 +22,6 @@ const JoinAuth: React.FC<JoinAuthProps> = ({emailAuth, setOpenModal}) => {
       }
   }, [])
 
-  console.log(emailAuth)
-
   const closeModal = () => {
     setTimeout(() => {
       setOpenModal(false)

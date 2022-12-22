@@ -248,6 +248,7 @@ export default RepeatTest
 
 const RepeatTestBase = styled.div`
 font-size: 13px;
+color: #252525;
 `
 
 const Inner = styled.div`
@@ -327,7 +328,7 @@ const Timer = styled.div`
 position: absolute;
 background-color: #e1eef6;
 color: #ff5f2e;
-font-weight: bold;
+font-weight: 500;
 top: 20px;
 right: 30px;
 width: 33px;

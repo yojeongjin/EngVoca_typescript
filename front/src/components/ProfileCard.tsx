@@ -29,7 +29,7 @@ const ProfileCard: React.FC<ProfileProps> = ({logout, user, editHandler}) => {
             </EditBtn>
           </EditWrap>
         </SpanWrap>
-        <SpanWrap style={{fontWeight: "400", color: "#555"}}>
+        <SpanWrap style={{fontWeight: "300", fontSize: "13px", color: "#555"}}>
           <span>{user.UserEmail}</span>
         </SpanWrap>
         <Logout onClick={logout}>로그아웃</Logout>

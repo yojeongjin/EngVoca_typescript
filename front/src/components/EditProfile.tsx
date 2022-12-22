@@ -62,7 +62,7 @@ const EditProfile: React.FC<EditProfileProps> = ({user, editContent}) => {
             수정
           </button>
         </ContentWrap>
-        <ContentWrap style={{fontWeight: "400", color: "#555"}}>
+        <ContentWrap style={{fontWeight: "300", color: "#555"}}>
           <span>{user.UserEmail}</span>
         </ContentWrap>
         <Logout disabled>로그아웃</Logout>
@@ -114,12 +114,12 @@ justify-content: space-between;
 `
 
 const ContentWrap = styled.div`
-font-size: 15px;
 padding: 0 6px;
 `
 
 const EditInput = styled.input`
 width: 70%;
+font-size: 14px;
 `
 
 const Logout = styled.button`
