@@ -1,10 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
-import { useRef } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import { JoinReqType } from '../types'
 import axios from 'axios'
-import { useCallback } from 'react'
 import Modal from './Modal'
 import JoinAuth from './JoinAuth'
 

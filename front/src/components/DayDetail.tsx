@@ -1,19 +1,17 @@
 import React from "react"
 import styled from "styled-components"
-import { UpdateReqType, UserType, DayType, RootState } from "../types"
+import { UpdateReqType, UserType, DayType } from "../types"
 import { Main } from "./Main"
 import { Link } from "react-router-dom"
 import { Desktop, Mobile } from "../hooks/useMediaQuery"
-import { useSelector } from "react-redux"
-
 interface DayDetailProps {
   user: UserType,
   modiActive: (updateData: UpdateReqType) =>  void
   idx: string
+  words: DayType[] | null
 }
 
-const DayDetail: React.FC<DayDetailProps> = ({user, modiActive, idx}) => {
-  const words = useSelector<RootState, DayType[] | null>((state) => state.day.day)
+const DayDetail: React.FC<DayDetailProps> = ({user, modiActive, idx, words}) => {
   const changeActive = () => {
     let Day = idx
     let active = '학습 완료✨'

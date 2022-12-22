@@ -1,25 +1,36 @@
-import React, { useCallback, useEffect } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useParams } from "react-router"
 import DayDetail from "../components/DayDetail"
 import useUser from "../hooks/useUser"
-import { getDayWord, updateActive } from "../redux/modules/day"
-import { UpdateReqType } from "../types"
+import { updateActive } from "../redux/modules/day"
+import { DayType, UpdateReqType } from "../types"
+
+import axios from "axios";
 
 const DayDetailContainer: React.FC = () => {
   const user = useUser()
+  const dispatch = useDispatch()
   const params = useParams()
   const idx = params.idx
-  const dispatch = useDispatch()
+  const [ words, setWords ] = useState<DayType[]>([])
 
   useEffect(() => {
-    dispatch(getDayWord({idx}))
+    axios.get('http://localhost:3001/api/words/'+idx, {params: {
+    idx: idx}}
+    )
+    .then((res) => {
+      setWords(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   },[])
   
   const modiActive = useCallback((updateData: UpdateReqType) => {
     dispatch(updateActive(updateData))
   }, [dispatch])
-  return <DayDetail user={user} modiActive={modiActive} idx={idx} />
+  return <DayDetail user={user} modiActive={modiActive} idx={idx} words={words} />
 }
 
 export default DayDetailContainer

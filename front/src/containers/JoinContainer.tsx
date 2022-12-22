@@ -1,5 +1,4 @@
-import React from 'react'
-import { useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import JoinComponent from '../components/JoinComponent'
 import { JoinReqType } from '../types'

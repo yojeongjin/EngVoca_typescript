@@ -1,30 +1,29 @@
-import React, { useEffect, useState, useRef }  from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState, useRef, useCallback }  from 'react'
 import styled from 'styled-components'
-import { TestType, RootState } from '../types'
 import { Main } from './Main'
 import { Desktop, Mobile } from '../hooks/useMediaQuery'
+import { TestType } from '../types'
 
-const RepeatTest: React.FC = () => {
-  const test = useSelector<RootState, TestType[] | null>((state) => state.test.test)
-  const [ answer, setAnswer ] = useState<string>('')
+interface RepeatProps{
+ test: TestType[]
+}
+
+const RepeatTest: React.FC<RepeatProps> = ({test}) => {
+  const [ answer, setAnswer ] = useState('')
   const [ answerList, setAnswerList ] = useState([])
   const [ count, setCount ] = useState(3)
-  const [ timer, setTimer ] = useState<number>(0)
+  const [ timer, setTimer ] = useState(0)
   const [ stage, setStage ] = useState(0)
   const [ vocaList, setVocaList ] = useState('')
-  const [ countCheck , setCountCheck ] = useState<boolean>(false)
   const [ testStart, setTestStart ] = useState<boolean>(true)
+  const [ countCheck , setCountCheck ] = useState<boolean>(false)
   const [ testEnd, setTestEnd ] = useState<boolean>(false)
 
   const getVoca = test.map((test) => {
-    return test.voca
+    return (test.voca)
   })
 
-  const getMeaning = test.map((test) => {
-    return test.meaning
-  })
-
+  const inputRef = useRef<HTMLInputElement>(null)
   const countId = useRef(null)
   const timerId = useRef(null)
 
@@ -41,10 +40,14 @@ const RepeatTest: React.FC = () => {
       setTestStart(false)
       setCountCheck(true)
       setTimer(5)
+      setVocaList(getVoca[0])
     }
   },[count])
   
   useEffect(() => {
+    if(inputRef.current !== null) {
+      inputRef.current.focus()
+    }
     timerId.current = setInterval(() => {
       setTimer(timer - 1)
     }, 1000)
@@ -79,20 +82,20 @@ const RepeatTest: React.FC = () => {
     nextStage()
   }
 
-  const handleOnKeyPress = (e) => {
+  const handleOnKeyPress = (e: any) => {
     if (e.key === 'Enter') {
-      handleOnClick()
+      return handleOnClick()
     }
   }
-
+  
   const answerWord = 
-  getVoca.map((voca) => {
-    return <WordItem>{voca}</WordItem>
+  test.map((test) => {
+    return <WordItem key={test.idAllVoca}>{test.voca}</WordItem>
   })
 
   const answerMeaning = 
-  getMeaning.map((meaning) => {
-    return <WordItem>{meaning}</WordItem>
+  test.map((test) => {
+    return <WordItem key={test.idAllVoca}>{test.meaning}</WordItem>
   })
 
   const myAnswer = 
@@ -126,9 +129,10 @@ const RepeatTest: React.FC = () => {
                   </QandASection>
                   <QandASection>
                     <AnswerInput 
+                    ref={inputRef}
                     placeholder='정답을 입력해주세요.'
                     value={answer}
-                    onChange={(e)=>setAnswer(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setAnswer(e.target.value)}
                     onKeyPress={handleOnKeyPress}
                     />
                     <AnswerBtn onClick={handleOnClick}>
@@ -193,6 +197,7 @@ const RepeatTest: React.FC = () => {
                 </QandASection>
                 <QandASection>
                   <AnswerInput 
+                  ref={inputRef}
                   placeholder='정답을 입력해주세요.'
                   value={answer}
                   onChange={(e)=>setAnswer(e.target.value)}

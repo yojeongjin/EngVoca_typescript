@@ -1,17 +1,27 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import axios from "axios";
+
 import RepeatTest from '../components/RepeatTest'
-import { getTestWord } from '../redux/modules/test'
+import { TestType } from '../types';
 
 const RepeatContainer: React.FC = () => {
-  const dispatch = useDispatch()
+  const [ test, setTest ] = useState<TestType[]>([])
 
   useEffect(()=> {
-    dispatch(getTestWord())
+    axios.get('http://localhost:3001/api/test')
+    .then((res) => {
+      let randomData = res.data.sort(() => Math.random() - 0.5)
+      randomData.length = 10
+
+      setTest(randomData)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   },[])
 
 
-  return <RepeatTest />
+  return <RepeatTest test={test} />
 }
 
 

@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import auth from "./auth"
 import save from "./save"
-import test from "./test"
 import day from "./day"
 
 //redux-persist
@@ -16,7 +15,6 @@ const persistConfig = {
 const reducer = combineReducers({
   auth,
   save,
-  test,
   day
 })
 

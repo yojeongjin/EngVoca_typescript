@@ -1,8 +1,8 @@
 import { AnyAction } from "redux";
 import axios from "axios";
 import { createActions, handleActions } from "redux-actions";
-import { call, put, select, takeEvery } from "redux-saga/effects";
-import { DayType, GetDayType, UpdateReqType } from "../../types";
+import { call, put, takeEvery } from "redux-saga/effects";
+import { DayType, UpdateReqType } from "../../types";
 
 export interface DayState {
   day: DayType[] | null;
@@ -51,35 +51,10 @@ export default reducer
 
 //saga
 
-export const { getDayWord, updateActive } = createActions("GET_DAY_WORD","UPDATE_ACTIVE", {prefix})
+export const { updateActive } = createActions("UPDATE_ACTIVE", {prefix})
 
 export function* daySaga() {
-  yield takeEvery(`${prefix}/GET_DAY_WORD`, getDayWordSaga)
   yield takeEvery(`${prefix}/UPDATE_ACTIVE`, updateActiveSaga)
-}
-
-interface getDayWordSagaAction extends AnyAction {
-  payload: GetDayType
-}
-
-
-async function getDayAPI(idx: any): Promise<string> {
-  const res = await axios.get('http://localhost:3001/api/words/'+idx, {params: {
-    idx: idx}
-  })
-
-  return res.data
-}
-
-function* getDayWordSaga(action: getDayWordSagaAction) {
-  try {
-    const { idx } = action.payload
-    yield put(pending())
-    const day: DayType[] = yield call(getDayAPI, idx)
-    yield put(success(day))
-  } catch(error) {
-    yield put(fail('UNKNOWN_ERROR'))
-  }
 }
 
 interface updateActiveSagaAction extends AnyAction {
