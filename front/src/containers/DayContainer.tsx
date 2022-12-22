@@ -10,7 +10,7 @@ const DayContainer: React.FC = () => {
   const [ dayData, setDayData ] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/day', {params: {
+    axios.get('http://15.165.206.3:3001/api/day', {params: {
       idUser: idUser
     }})
     .then((res) => {
@@ -20,7 +20,7 @@ const DayContainer: React.FC = () => {
   },[])
 
    const changeActive = (reqData:ActiveReqType) => {
-    axios.patch('http://localhost:3001/api/day', reqData)
+    axios.patch('http://15.165.206.3:3001/api/day', reqData)
     .then((res) => {
       console.log(res.data.msg)
     })

@@ -14,7 +14,7 @@ const BasicList: React.FC = () => {
 
   useEffect(() => {
     let vocaIdx = location.pathname.split('/')[1]
-    axios.get('http://localhost:3001/api/eachtype', {params: {
+    axios.get('http://15.165.206.3:3001/api/eachtype', {params: {
       vocaIdx: vocaIdx, chapter: 'chapter%'}
     })
     .then((res) => {
@@ -45,7 +45,7 @@ const BasicList: React.FC = () => {
 
   const getVoca = (chapIdx) => {
     let vocaIdx = location.pathname.split('/')[1]
-    axios.get('http://localhost:3001/api/eachtype', {params: {
+    axios.get('http://15.165.206.3:3001/api/eachtype', {params: {
       vocaIdx: vocaIdx, chapter: chapIdx}
     })
     .then((res) => {

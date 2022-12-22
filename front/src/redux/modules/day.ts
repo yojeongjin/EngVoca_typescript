@@ -62,7 +62,7 @@ interface updateActiveSagaAction extends AnyAction {
 }
 
 async function updateAPI(updateData: UpdateReqType): Promise<string> {
-  return await axios.patch('http://localhost:3001/api/day', updateData)
+  return await axios.patch('http://15.165.206.3:3001/api/day', updateData)
 }
 
 function* updateActiveSaga(action: updateActiveSagaAction) {

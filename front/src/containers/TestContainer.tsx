@@ -16,7 +16,7 @@ const TestContainer: React.FC = () => {
   const [ words, setWords ] =useState<DayType[]>([])
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/words/'+idx, {params: {
+    axios.get('http://15.165.206.3:3001/api/words/'+idx, {params: {
     idx: idx}}
     )
     .then((res) => {

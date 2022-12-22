@@ -66,7 +66,7 @@ interface LoginSagaAction extends AnyAction {
 }
 
 async function loginAPI(loginData: LoginReqType): Promise<string> {
-  const res = await axios.post('http://localhost:3001/api/signin', loginData)
+  const res = await axios.post('http://15.165.206.3:3001/api/signin', loginData)
   
   return res.data.result
 }
@@ -103,7 +103,7 @@ interface JoinSagaAction extends AnyAction {
 }
 
 async function joinAPI(joinData: JoinReqType): Promise<string> {
-  const res = await axios.post('http://localhost:3001/api/join', joinData)
+  const res = await axios.post('http://15.165.206.3:3001/api/join', joinData)
   
   return res.data.result
 }
@@ -126,7 +126,7 @@ interface ModiSagaAction extends AnyAction {
 }
 
 async function modiAPI(modiData: ModiReqType): Promise<string> {
-  const res = await axios.patch('http://localhost:3001/api/signin', modiData)
+  const res = await axios.patch('http://15.165.206.3:3001/api/signin', modiData)
   
   return res.data.msg
 }

@@ -89,7 +89,7 @@ const JoinComponent: React.FC<JoinProps> = ({join}) => {
     }
     try {
       const res = await axios.post(
-        'http://localhost:3001/api/mail', {
+        'http://15.165.206.3:3001/api/mail', {
           userEmail: email
         })
         if(res.data.code === 400) {

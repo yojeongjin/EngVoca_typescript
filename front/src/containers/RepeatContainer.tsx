@@ -8,7 +8,7 @@ const RepeatContainer: React.FC = () => {
   const [ test, setTest ] = useState<TestType[]>([])
 
   useEffect(()=> {
-    axios.get('http://localhost:3001/api/test')
+    axios.get('http://15.165.206.3:3001/api/test')
     .then((res) => {
       let randomData = res.data.sort(() => Math.random() - 0.5)
       randomData.length = 10

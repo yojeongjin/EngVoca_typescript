@@ -65,7 +65,7 @@ interface saveSagaAction extends AnyAction {
 }
 
 async function saveAPI(saveData: SaveReqType): Promise<string> {
-  const res = await axios.post('http://localhost:3001/api/save', saveData)
+  const res = await axios.post('http://15.165.206.3:3001/api/save', saveData)
   
   return res.data
 }
@@ -85,7 +85,7 @@ interface deleteWordSagaAction extends AnyAction {
 }
 
 async function deleteAPI(deleteData: any): Promise<string> {
-  return await axios.delete('http://localhost:3001/api/save', {params: {
+  return await axios.delete('http://15.165.206.3:3001/api/save', {params: {
     idTest :deleteData}
   })
 }
@@ -108,7 +108,7 @@ interface getWordSagaAction extends AnyAction {
 }
 
 async function getWordAPI(needData: any): Promise<string> {
-  const res = await axios.get('http://localhost:3001/api/save', {params: {
+  const res = await axios.get('http://15.165.206.3:3001/api/save', {params: {
     idUser: needData}
   })
 
