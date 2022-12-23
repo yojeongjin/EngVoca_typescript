@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef }  from 'react'
 import styled from 'styled-components'
-import { Main } from './Main'
-import { Desktop, Mobile } from '../hooks/useMediaQuery'
 import { TestType } from '../types'
 
 interface RepeatProps{
@@ -104,142 +102,69 @@ const RepeatTest: React.FC<RepeatProps> = ({test}) => {
   })
 
   return (
-    <>
-      <Desktop>
-        <Main>
-          <RepeatTestBase>
-            <Inner>
-              {
-                testStart &&
-                <div style={{flexDirection: "column", position: "relative"}}>
-                  <img style={{width: "100px", position: "absolute", top: "-50px", right: "5px"}}
-                  src={`${process.env.PUBLIC_URL}/assets/mortarboard.webp`} 
-                  alt="모자" />
-                  <CountContent>{count}</CountContent>
-                </div>
-              }
-              {
-                countCheck &&
-                <RepeatContent>
-                  <Timer>{timer}</Timer>
-                  <QandASection>
-                    <QuestionSection>
-                      {vocaList}
-                    </QuestionSection>
-                  </QandASection>
-                  <QandASection>
-                    <AnswerInput 
-                    ref={inputRef}
-                    placeholder='정답을 입력해주세요.'
-                    value={answer}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setAnswer(e.target.value)}
-                    onKeyPress={handleOnKeyPress}
-                    />
-                    <AnswerBtn onClick={handleOnClick}>
-                      <img 
-                      style={{width: "20px", height:"20px"}}
-                      src={`${process.env.PUBLIC_URL}/assets/sendicon.png`} alt="전송아이콘" />
-                    </AnswerBtn>
-                  </QandASection>
-                </RepeatContent>
-              }
-              {
-                testEnd &&
-                <RepeatContent style={{width: "700px", height: "500px", flexDirection: "row"}}>
-                  <SubTitle>💌 나의 답안지 💌</SubTitle>
-                  <AnswerList>
-                    <WordList>
-                      {answerWord}
-                    </WordList>
-                  </AnswerList>
+    <RepeatTestBase>
+      <Inner>
+        {
+          testStart &&
+          <div style={{flexDirection: "column", position: "relative"}}>
+            <img style={{width: "100px", position: "absolute", top: "-50px", right: "5px"}}
+            src={`${process.env.PUBLIC_URL}/assets/mortarboard.webp`} 
+            alt="모자" />
+            <CountContent>{count}</CountContent>
+          </div>
+        }
+        {
+          countCheck &&
+          <RepeatContent>
+            <Timer>{timer}</Timer>
+            <QandASection>
+              <QuestionSection>
+                {vocaList}
+              </QuestionSection>
+            </QandASection>
+            <QandASection>
+              <AnswerInput 
+              ref={inputRef}
+              placeholder='정답을 입력해주세요.'
+              value={answer}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setAnswer(e.target.value)}
+              onKeyPress={handleOnKeyPress}
+              />
+              <AnswerBtn onClick={handleOnClick} type="button">
+                <img 
+                style={{width: "20px", height:"20px"}}
+                src={`${process.env.PUBLIC_URL}/assets/sendicon.png`} alt="전송아이콘" />
+              </AnswerBtn>
+            </QandASection>
+          </RepeatContent>
+        }
+        {
+          testEnd &&
+          <RepeatContent style={{width: "700px", height: "500px", flexDirection: "row"}}>
+            <SubTitle>💌 나의 답안지 💌</SubTitle>
+            <AnswerList>
+              <WordList>
+                {answerWord}
+              </WordList>
+            </AnswerList>
 
-                  <AnswerList>
-                    <WordList>
-                      {answerMeaning}
-                    </WordList>
-                  </AnswerList>
+            <AnswerList>
+              <WordList>
+                {answerMeaning}
+              </WordList>
+            </AnswerList>
 
-                  <AnswerList style={{backgroundColor:"#fff"}}>
-                    <AnserItem>
-                      <WordList>
-                        {myAnswer}
-                      </WordList>
-                    </AnserItem>
-                  </AnswerList>
-                </RepeatContent>
-              }
-            </Inner>
-          </RepeatTestBase>
-        </Main>
-      </Desktop>
-
-      {/* 모바일 */}
-      <Mobile>
-        <RepeatTestBase>
-          <Inner>
-            {
-              testStart &&
-              <div style={{flexDirection: "column", position: "relative"}}>
-                <img style={{width: "100px", position: "absolute", top: "-50px", right: "5px"}}
-                src={`${process.env.PUBLIC_URL}/assets/mortarboard.webp`} 
-                alt="모자" />
-                <CountContent>{count}</CountContent>
-              </div>
-            }
-            {
-              countCheck &&
-              <RepeatContent>
-                <Timer>{timer}</Timer>
-                <QandASection>
-                  <QuestionSection>
-                    {vocaList}
-                  </QuestionSection>
-                </QandASection>
-                <QandASection>
-                  <AnswerInput 
-                  ref={inputRef}
-                  placeholder='정답을 입력해주세요.'
-                  value={answer}
-                  onChange={(e)=>setAnswer(e.target.value)}
-                  onKeyPress={handleOnKeyPress}
-                  />
-                  <AnswerBtn onClick={handleOnClick}>
-                    <img 
-                    style={{width: "20px", height:"20px"}}
-                    src={`${process.env.PUBLIC_URL}/assets/sendicon.png`} alt="전송아이콘" />
-                  </AnswerBtn>
-                </QandASection>
-              </RepeatContent>
-            }
-            {
-              testEnd &&
-              <RepeatContent style={{width: "700px", height: "500px", flexDirection: "row"}}>
-                <SubTitle>💌 나의 답안지 💌</SubTitle>
-                <AnswerList>
-                  <WordList>
-                    {answerWord}
-                  </WordList>
-                </AnswerList>
-
-                <AnswerList>
-                  <WordList>
-                    {answerMeaning}
-                  </WordList>
-                </AnswerList>
-
-                <AnswerList style={{backgroundColor:"#fff"}}>
-                  <AnserItem>
-                    <WordList>
-                      {myAnswer}
-                    </WordList>
-                  </AnserItem>
-                </AnswerList>
-              </RepeatContent>
-            }
-          </Inner>
-        </RepeatTestBase>
-      </Mobile>
-    </>
+            <AnswerList style={{backgroundColor:"#fff"}}>
+              <AnserItem>
+                <WordList>
+                  {myAnswer}
+                </WordList>
+              </AnserItem>
+            </AnswerList>
+          </RepeatContent>
+        }
+      </Inner>
+    </RepeatTestBase>
   )
 }
 
@@ -261,6 +186,7 @@ align-items: center;
 
 @media ${props => props.theme.mobile} {
   width: 370px;
+  height: calc(var(--vh, 1vh) * 100);
 }
 `
 
@@ -322,6 +248,7 @@ const AnswerBtn = styled.button`
 position: absolute;
 top: 5px;
 right: 0;
+cursor: pointer;
 `
 
 const Timer = styled.div`

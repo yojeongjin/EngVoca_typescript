@@ -207,6 +207,7 @@ flex-direction: column;
 
 @media ${props => props.theme.mobile} {
   width: 370px;
+  height: calc(var(--vh, 1vh) * 100);
 }
 `
 

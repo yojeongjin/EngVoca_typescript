@@ -5,6 +5,10 @@ import RepeatContainer from '../containers/RepeatContainer'
 import SigninContainer from '../containers/SigninContainer'
 import useUser from '../hooks/useUser';
 
+import { Desktop, Mobile } from "../hooks/useMediaQuery";
+import { Main } from "../components/Main";
+import BottomNav from "../components/BottomNav";
+
 const Repeat: React.FC = () => {
   const user = useUser()
 
@@ -14,8 +18,18 @@ const Repeat: React.FC = () => {
 
   return (
     <>
-      <LeftSide />
-      <RepeatContainer />
+      <Desktop>
+        <Main>
+          <LeftSide />
+          <RepeatContainer />
+        </Main>
+      </Desktop>
+      <Mobile>
+        <>
+          <RepeatContainer />
+          <BottomNav />
+        </>
+      </Mobile>
     </>
   )
 }

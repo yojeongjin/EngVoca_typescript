@@ -5,6 +5,10 @@ import LeftSide from "../components/LeftSide";
 import EachTypeList from "../components/EachTypeList";
 import useUser from "../hooks/useUser";
 
+import { Desktop, Mobile } from "../hooks/useMediaQuery";
+import { Main } from "../components/Main";
+import BottomNav from "../components/BottomNav";
+
 const EachType: React.FC = () => {
   const user = useUser()
 
@@ -13,10 +17,19 @@ const EachType: React.FC = () => {
   }
   return (
     <>
-      <LeftSide />
-      <EachTypeList />
+      <Desktop>
+        <Main>
+          <LeftSide />
+          <EachTypeList />
+        </Main>
+      </Desktop>
+      <Mobile>
+        <>
+          <EachTypeList />
+          <BottomNav />
+        </>
+      </Mobile>
     </>
-
   )
 }
 

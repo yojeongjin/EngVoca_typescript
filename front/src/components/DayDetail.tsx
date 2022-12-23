@@ -1,9 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import { UpdateReqType, UserType, DayType } from "../types"
-import { Main } from "./Main"
 import { Link } from "react-router-dom"
-import { Desktop, Mobile } from "../hooks/useMediaQuery"
+
 interface DayDetailProps {
   user: UserType,
   modiActive: (updateData: UpdateReqType) =>  void
@@ -30,39 +29,18 @@ const DayDetail: React.FC<DayDetailProps> = ({user, modiActive, idx, words}) => 
   })
 
   return(
-    <>
-      <Desktop>
-        <Main>
-          <DayDetailBase>
-            <Inner>
-              <WordsContent>
-                {wordsDetail}
-                <BtnSection>
-                  <Link to={"/test/" + idx}>
-                    <TestBtn onClick={changeActive}>테스트하러 가기</TestBtn>
-                  </Link>
-                </BtnSection>
-              </WordsContent>
-            </Inner>
-          </DayDetailBase>
-        </Main>
-      </Desktop>
-
-      <Mobile>
-        <DayDetailBase>
-          <Inner>
-            <WordsContent>
-              {wordsDetail}
-              <BtnSection>
-                <Link to={"/test/" + idx}>
-                  <TestBtn onClick={changeActive}>테스트하러 가기</TestBtn>
-                </Link>
-              </BtnSection>
-            </WordsContent>
-          </Inner>
-        </DayDetailBase>
-      </Mobile>
-    </>
+    <DayDetailBase>
+      <Inner>
+        <WordsContent>
+          {wordsDetail}
+          <BtnSection>
+            <Link to={"/test/" + idx}>
+              <TestBtn onClick={changeActive}>테스트하러 가기</TestBtn>
+            </Link>
+          </BtnSection>
+        </WordsContent>
+      </Inner>
+    </DayDetailBase>
   )
 }
 
@@ -83,6 +61,7 @@ align-items: center;
 
 @media ${props => props.theme.mobile} {
   width: 370px;
+  height: calc(var(--vh, 1vh) * 100);
 }
 `
 

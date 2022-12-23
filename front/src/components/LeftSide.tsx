@@ -3,60 +3,49 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ProfileContainer from '../containers/ProfileContainer';
 
-import { Desktop, Mobile } from '../hooks/useMediaQuery';
-import BottomNav from './BottomNav';
-
 export default function LeftSide() {
   return (
-    <>
-      <Desktop>
-        <LeftSideBase>
-          <Link to="/">
-            <Logo>
-              <img src={`${process.env.PUBLIC_URL}/assets/vocalogo.webp`} alt='로고' />
-            </Logo>
-          </Link>
-          <ProfileContainer />
+    <LeftSideBase>
+      <Link to="/">
+        <Logo>
+          <img src={`${process.env.PUBLIC_URL}/assets/vocalogo.webp`} alt='로고' />
+        </Logo>
+      </Link>
+      <ProfileContainer />
 
-          <Nav>
-            <Link to="/eachtype">
-              <NavItem>
-                <img 
-                src={`${process.env.PUBLIC_URL}/assets/stepicon.png`} 
-                alt='아이콘'
-                style={{marginRight: "10px"}}
-                />
-                유형별 학습하기
-              </NavItem>
-            </Link>
-            <Link to="/repeat">
-              <NavItem>
-                <img 
-                src={`${process.env.PUBLIC_URL}/assets/quizicon.png`} 
-                alt='아이콘'
-                style={{marginRight: "10px"}}
-                />
-                복습 퀴즈 풀기
-              </NavItem>
-            </Link>
-            <Link to="/notebook">
-              <NavItem>
-                <img 
-                src={`${process.env.PUBLIC_URL}/assets/noteicon.png`} 
-                alt='아이콘'
-                style={{marginRight: "10px"}}
-                />
-                단어장 보러가기
-              </NavItem>
-            </Link>
-          </Nav>
-        </LeftSideBase>
-      </Desktop>
-
-      <Mobile>
-        <BottomNav />
-      </Mobile>
-    </>
+      <Nav>
+        <Link to="/eachtype">
+          <NavItem>
+            <img 
+            src={`${process.env.PUBLIC_URL}/assets/stepicon.png`} 
+            alt='아이콘'
+            style={{marginRight: "10px"}}
+            />
+            유형별 학습하기
+          </NavItem>
+        </Link>
+        <Link to="/repeat">
+          <NavItem>
+            <img 
+            src={`${process.env.PUBLIC_URL}/assets/quizicon.png`} 
+            alt='아이콘'
+            style={{marginRight: "10px"}}
+            />
+            복습 퀴즈 풀기
+          </NavItem>
+        </Link>
+        <Link to="/notebook">
+          <NavItem>
+            <img 
+            src={`${process.env.PUBLIC_URL}/assets/noteicon.png`} 
+            alt='아이콘'
+            style={{marginRight: "10px"}}
+            />
+            단어장 보러가기
+          </NavItem>
+        </Link>
+      </Nav>
+    </LeftSideBase>
   )
 }
 

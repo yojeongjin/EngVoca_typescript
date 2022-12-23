@@ -4,6 +4,11 @@ import DayDetailContainer from "../containers/DayDetailContainer"
 import SigninContainer from "../containers/SigninContainer"
 import useUser from "../hooks/useUser"
 
+import { Desktop, Mobile } from "../hooks/useMediaQuery";
+import { Main } from "../components/Main";
+import BottomNav from "../components/BottomNav";
+
+
 const Day: React.FC = () => {
   const user = useUser()
 
@@ -12,8 +17,18 @@ const Day: React.FC = () => {
   }
   return (
     <>
-      <LeftSide />
-      <DayDetailContainer />
+      <Desktop>
+        <Main>
+          <LeftSide />
+          <DayDetailContainer />
+        </Main>
+      </Desktop>
+      <Mobile>
+        <>
+          <DayDetailContainer />
+          <BottomNav />
+        </>
+      </Mobile>
     </>
   ) 
 }

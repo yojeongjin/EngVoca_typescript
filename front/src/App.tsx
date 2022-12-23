@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './styled/theme';
 import GlobalStyles from './styled/GlobalStyles';
@@ -16,6 +16,14 @@ import Join from './pages/Join'
 import Repeat from './pages/Repeat';
 
 function App() {
+  function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`)
+  }
+  useEffect(() => {
+    setScreenSize()
+  })
+
   return (
     <ErrorBoundary FallbackComponent={Error}>
       <ThemeProvider theme={theme}>

@@ -5,6 +5,9 @@ import LeftSide from "../components/LeftSide";
 import DayContainer from "../containers/DayContainer";
 import useUser from "../hooks/useUser";
 
+import { Desktop, Mobile } from "../hooks/useMediaQuery";
+import { Main } from "../components/Main";
+import BottomNav from "../components/BottomNav";
 
 const Home: React.FC = () => {
   const user = useUser()
@@ -15,8 +18,18 @@ const Home: React.FC = () => {
   }
   return (
     <>
-      <LeftSide />
-      <DayContainer />
+      <Desktop>
+        <Main>
+          <LeftSide />
+          <DayContainer />
+        </Main>
+      </Desktop>
+      <Mobile>
+        <>
+          <DayContainer />
+          <BottomNav />
+        </>
+      </Mobile>
     </>
   )
 }

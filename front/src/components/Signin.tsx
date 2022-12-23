@@ -15,6 +15,11 @@ const Signin: React.FC<SigninProps> = ({login}) => {
     const email = emailRef.current!.value
     const password = pwRef.current!.value
 
+    if(email === '') {
+      return alert('이메일을 입력해주세요.')
+    } else if(password === '') {
+      return alert('비밀번호를 입력해주세요.')
+    }
     login({email, password})
   }
 
@@ -85,6 +90,7 @@ align-items: center;
 flex-direction: column;
 @media ${props => props.theme.mobile} {
   width: 370px;
+  height: calc(var(--vh, 1vh) * 100);
 }
 `
 

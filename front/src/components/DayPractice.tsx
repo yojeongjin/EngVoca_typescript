@@ -2,9 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ActiveReqType } from '../types';
-import { Main } from './Main';
-import { Desktop,Mobile } from '../hooks/useMediaQuery';
-
 
 interface DayProps {
   dayData: any[] | null
@@ -39,35 +36,15 @@ const DayPractice: React.FC<DayProps> = ({dayData, changeActive, idUser}) => {
   })
 
   return (
-    <>
-      <Desktop>
-        <Main>
-          <DayPracticeBase>
-            <Inner>
-              <DayContent>
-                <PracticeList>
-                  {dayDetail}
-                </PracticeList>
-              </DayContent>
-            </Inner>
-          </DayPracticeBase>
-        </Main>
-      </Desktop>
-
-      {/* 모바일 */}
-
-      <Mobile>
-        <DayPracticeBase>
-            <Inner>
-              <DayContent>
-                <PracticeList>
-                  {dayDetail}
-                </PracticeList>
-              </DayContent>
-            </Inner>
-          </DayPracticeBase>
-      </Mobile>
-    </>
+    <DayPracticeBase>
+      <Inner>
+        <DayContent>
+          <PracticeList>
+            {dayDetail}
+          </PracticeList>
+        </DayContent>
+      </Inner>
+    </DayPracticeBase>
   )
 }
 
@@ -88,6 +65,7 @@ align-items: center;
 
 @media ${props => props.theme.mobile} {
   width: 370px;
+  height: calc(var(--vh, 1vh) * 100);
 }
 `
 

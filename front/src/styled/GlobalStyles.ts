@@ -4,7 +4,9 @@ import reset from 'styled-reset'
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
-
+  :root {
+    --vh: 100%;
+  }
   * {
   font-weight: inherit;
   color: inherit;

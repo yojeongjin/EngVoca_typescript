@@ -2,9 +2,7 @@ import React, { useEffect, useState }  from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { Main } from './Main';
 import { EachWords } from '../types';
-import { Desktop, Mobile } from '../hooks/useMediaQuery';
 
 const BasicList: React.FC = () => {
   const location = useLocation()
@@ -74,44 +72,20 @@ const BasicList: React.FC = () => {
   })
   
   return (
-    <>
-      <Desktop>
-        <Main>
-          <BasicBase>
-            <Inner>
-              <ChapterTitle>
-                <ChapterList>
-                  {chapterDetail}
-                </ChapterList>
-              </ChapterTitle>
+    <BasicBase>
+      <Inner>
+        <ChapterTitle>
+          <ChapterList>
+            {chapterDetail}
+          </ChapterList>
+        </ChapterTitle>
 
-              <WordContent>
-                {eachDetail}
-              </WordContent>
+        <WordContent>
+          {eachDetail}
+        </WordContent>
 
-            </Inner>
-          </BasicBase>
-        </Main>
-      </Desktop>
-
-      {/** 모바일 */}
-      <Mobile>
-        <BasicBase>
-          <Inner>
-            <ChapterTitle>
-              <ChapterList>
-                {chapterDetail}
-              </ChapterList>
-            </ChapterTitle>
-
-            <WordContent>
-              {eachDetail}
-            </WordContent>
-
-          </Inner>
-        </BasicBase>
-      </Mobile>
-    </>
+      </Inner>
+    </BasicBase>
   )
 }
 
@@ -129,6 +103,7 @@ margin: 0 auto;
 
 @media ${props => props.theme.mobile} {
   width: 370px;
+  height: calc(var(--vh, 1vh) * 100);
 }
 `
 

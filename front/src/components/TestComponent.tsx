@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { DayType, SaveReqType, UserType } from "../types"
-import { Main } from "./Main"
 import save from "../assets/save.png"
 import saved from "../assets/saved.png"
 import { Desktop, Mobile } from "../hooks/useMediaQuery"
@@ -67,19 +66,17 @@ const TestComponent: React.FC<TestProps> = ({user, saveWord, words}) => {
   return (
     <>
       <Desktop>
-        <Main>
-          <TestBase>
-            <Inner>
-              <TestContent>
-                {wordsDetail}
-                <span 
-                style={{fontSize: "13px", display: "block", textAlign: "center", padding: "15px 0 0"}}>
-                  🍋카드를 뒤집으면 정답이 보여요!
-                </span>
-              </TestContent>
-            </Inner>
-          </TestBase>
-        </Main>
+        <TestBase>
+          <Inner>
+            <TestContent>
+              {wordsDetail}
+              <span 
+              style={{fontSize: "13px", display: "block", textAlign: "center", padding: "15px 0 0"}}>
+                🍋카드를 뒤집으면 정답이 보여요!
+              </span>
+            </TestContent>
+          </Inner>
+        </TestBase>
       </Desktop>
 
       <Mobile>
@@ -116,6 +113,7 @@ align-items: center;
 
 @media ${props => props.theme.mobile} {
   width: 370px;
+  height: calc(var(--vh, 1vh) * 100);
 }
 `
 
